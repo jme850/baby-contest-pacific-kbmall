@@ -7,29 +7,80 @@ from datetime import datetime
 os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
 
-st.title("Pacific Kbmall Pendaftaran Si Manja SUPERSTAR")
-st.markdown("### 📅 Tempoh Peraduan: 9 November - 29 November 2026")
-st.write("Sila isi borang di bawah dan muat naik gambar baby serta resit pembelian RM100 ke atas.")
+# Pilihan Bahasa (Language Selection)
+lang = st.selectbox("🌐 Choose Language / Pilih Bahasa / 选择语言", ["Bahasa Melayu", "English", "中文"])
+
+# Kamus Teks Mengikut Bahasa
+if lang == "English":
+    title = "Pacific KB Mall Super Star Baby Contest Registration"
+    period = "📅 Contest Period: 9 November - 29 November 2026"
+    desc = "Please fill out the form below and upload your baby's photo along with a purchase receipt of RM100 and above."
+    parent_label = "Parent's Name"
+    phone_label = "Phone Number (WhatsApp)"
+    baby_label = "Baby's Name"
+    age_label = "Baby's Age (Months)"
+    photo_label = "Upload Baby's Photo (JPG/PNG)"
+    receipt_label = "Upload Receipt (RM100 & above) (JPG/PNG/PDF)"
+    submit_label = "Submit Entry"
+    error_msg = "Please complete all information and upload the required files!"
+    success_msg = "Congratulations! Your entry has been successfully submitted. Thank you for joining the Pacific KB Mall Baby Contest!"
+    created_by = "Created by : Azmer"
+
+elif lang == "中文":
+    _ = lang # placeholder
+    title = "Pacific KB Mall 超级星宝贝 婴儿比赛报名表格"
+    period = "📅 比赛日期：2026年11月9日 - 11月29日"
+    desc = "请填写以下表格，并上传宝宝照片以及RM100或以上的购物收据。"
+    parent_label = "家长姓名"
+    phone_label = "电话号码 (WhatsApp)"
+    baby_label = "宝宝姓名"
+    age_label = "宝宝年龄 (个月)"
+    photo_label = "上传宝宝照片 (JPG/PNG)"
+    receipt_label = "上传购物收据 (RM100或以上) (JPG/PNG/PDF)"
+    submit_label = "提交报名"
+    error_msg = "请填写所有资料并上传所需文件！"
+    success_msg = "恭喜！您的报名已成功提交。感谢您参加 Pacific KB Mall 婴儿比赛！"
+    created_by = "Created by : Azmer"
+
+else:  # Default Bahasa Melayu
+    title = "Pacific KB Mall Pendaftaran Si Manja SUPERSTAR"
+    period = "📅 Tempoh Peraduan: 9 November - 29 November 2026"
+    desc = "Sila isi borang di bawah dan muat naik gambar baby serta resit pembelian RM100 ke atas."
+    parent_label = "Nama Ibu / Bapa"
+    phone_label = "Nombor Telefon (WhatsApp)"
+    baby_label = "Nama Anak"
+    age_label = "Umur Anak (Bulan)"
+    photo_label = "Muat naik Gambar Baby (JPG/PNG)"
+    receipt_label = "Muat naik Resit Pembelian RM100 ke atas (JPG/PNG/PDF)"
+    submit_label = "Hantar Penyertaan"
+    error_msg = "Sila lengkapkan semua maklumat dan muat naik fail yang diperlukan!"
+    success_msg = "Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest Pacific KB Mall!"
+    created_by = "Created by : Azmer"
+
+# Paparan Antaramuka (UI)
+st.title(title)
+st.markdown(f"### {period}")
+st.write(desc)
 
 # Borang Pendaftaran
 with st.form("baby_form"):
-    parent_name = st.text_input("Nama Ibu / Bapa")
-    phone_no = st.text_input("Nombor Telefon (WhatsApp)")
-    baby_name = st.text_input("Nama Anak")
-    baby_age = st.number_input("Umur Anak (Bulan)", min_value=0, max_value=36, value=12)
+    parent_name = st.text_input(parent_label)
+    phone_no = st.text_input(phone_label)
+    baby_name = st.text_input(baby_label)
+    baby_age = st.number_input(age_label, min_value=0, max_value=36, value=12)
     
     st.markdown("---")
     
     # Bahagian Upload Fail
-    uploaded_baby_photo = st.file_uploader("Muat naik Gambar Baby (JPG/PNG)", type=["jpg", "jpeg", "png"])
-    uploaded_receipt = st.file_uploader("Muat naik Resit Pembelian RM100 ke atas (JPG/PNG/PDF)", type=["jpg", "jpeg", "png", "pdf"])
+    uploaded_baby_photo = st.file_uploader(photo_label, type=["jpg", "jpeg", "png"])
+    uploaded_receipt = st.file_uploader(receipt_label, type=["jpg", "jpeg", "png", "pdf"])
     
-    submit_button = st.form_submit_button(label="Hantar Penyertaan")
+    submit_button = st.form_submit_button(label=submit_label)
 
 # Proses bila customer tekan 'Hantar'
 if submit_button:
     if not parent_name or not phone_no or not baby_name or not uploaded_baby_photo or not uploaded_receipt:
-        st.error("Sila lengkapkan semua maklumat dan muat naik fail yang diperlukan!")
+        st.error(error_msg)
     else:
         # Simpan fail gambar baby
         baby_photo_path = os.path.join("uploads/baby_photos", f"{phone_no}_{uploaded_baby_photo.name}")
@@ -39,10 +90,10 @@ if submit_button:
         # Simpan fail resit
         receipt_path = os.path.join("uploads/receipts", f"{phone_no}_{uploaded_receipt.name}")
         with open(receipt_path, "wb") as f:
-            f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer()) # simpan betul
+            f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer())
             
-        st.success("Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest Pacific KB Mall!")
+        st.success(success_msg)
 
-# Bahagian bawah (Created by di sebelah kanan, saiz kecil)
+# Bahagian bawah (Created by)
 st.markdown("---")
-st.markdown("<p style='text-align: right; font-size: 12px; color: grey;'>Created by : Azmer</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: right; font-size: 12px; color: grey;'>{created_by}</p>", unsafe_allow_html=True)
