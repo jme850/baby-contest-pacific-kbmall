@@ -10,8 +10,16 @@ st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", 
 os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
 
-# Pilihan Bahasa (Language Selection)
-lang = st.selectbox("🌐 Choose Language / Pilih Bahasa / 选择语言", ["Bahasa Melayu", "English", "中文"])
+# Susun Bahasa & "Created by" di bahagian atas sekali (Sebelah-menyebelah)
+top_col1, top_col2 = st.columns([3, 1])
+
+with top_col1:
+    # Pilihan Bahasa (Language Selection)
+    lang = st.selectbox("🌐 Choose Language / Pilih Bahasa / 选择语言", ["Bahasa Melayu", "English", "中文"])
+
+with top_col2:
+    # Paparan "Created by : Azmer" di penjuru kanan atas (diletakkan sedikit ke bawah supaya selari dengan dropdown bahasa)
+    st.markdown("<div style='text-align: right; padding-top: 28px;'><span style='font-size: 11px; color: grey;'>Created by : Azmer</span></div>", unsafe_allow_html=True)
 
 # Kamus Teks Mengikut Bahasa
 if lang == "English":
@@ -27,7 +35,6 @@ if lang == "English":
     submit_label = "Submit Entry"
     error_msg = "Please complete all information and upload the required files!"
     success_msg = "Congratulations! Your entry has been successfully submitted. Thank you for joining the PACIFIC KB Mall Baby Contest!"
-    created_by = "Created by : Azmer"
 
 elif lang == "中文":
     _ = lang # placeholder
@@ -43,7 +50,6 @@ elif lang == "中文":
     submit_label = "提交报名"
     error_msg = "请填写所有资料并上传所需文件！"
     success_msg = "恭喜！您的报名已成功提交。感谢您参加 PACIFIC KB Mall 婴儿比赛！"
-    created_by = "Created by : Azmer"
 
 else:  # Default Bahasa Melayu
     title = "PACIFIC KB Mall Pendaftaran Si Manja SUPERSTAR"
@@ -58,7 +64,6 @@ else:  # Default Bahasa Melayu
     submit_label = "Hantar Penyertaan"
     error_msg = "Sila lengkapkan semua maklumat dan muat naik fail yang diperlukan!"
     success_msg = "Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest PACIFIC KB Mall!"
-    created_by = "Created by : Azmer"
 
 # Paparan Logo dan Tajuk Sebelah-Menyebelah
 col1, col2 = st.columns([1, 4])  
@@ -104,7 +109,3 @@ if submit_button:
             f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer())
             
         st.success(success_msg)
-
-# Bahagian bawah (Created by)
-st.markdown("---")
-st.markdown(f"<p style='text-align: right; font-size: 12px; color: grey;'>{created_by}</p>", unsafe_allow_html=True)
