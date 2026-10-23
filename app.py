@@ -6,6 +6,21 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
+# CSS untuk Letak Gambar Background Sendiri
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url("background.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Pastikan folder untuk simpan gambar wujud
 os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
@@ -18,7 +33,7 @@ with top_col1:
     lang = st.selectbox("🌐 Choose Language / Pilih Bahasa / 选择语言", ["Bahasa Melayu", "English", "中文"])
 
 with top_col2:
-    # Paparan "Created by : Azmer" di penjuru kanan atas (diletakkan sedikit ke bawah supaya selari dengan dropdown bahasa)
+    # Paparan "Created by : Azmer" di penjuru kanan atas
     st.markdown("<div style='text-align: right; padding-top: 28px;'><span style='font-size: 11px; color: grey;'>Created by : Azmer</span></div>", unsafe_allow_html=True)
 
 # Kamus Teks Mengikut Bahasa
