@@ -1,10 +1,14 @@
 import streamlit as st
 import pandas as pd
 import os
+import requests
 from datetime import datetime
 
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
+
+# URL Web App Google Apps Script anda (Gantikan teks dalam tanda petua ini)
+GOOGLE_SCRIPT_URL = "MASUKKAN_URL_GOOGLE_APPS_SCRIPT_DI_SINI"
 
 # CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, & Cerahkan Kotak Upload serta Bahasa
 st.markdown(
@@ -83,7 +87,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Pastikan folder untuk simpan gambar wujud
+# Pastikan folder tempatan wujud (sebagai sandaran)
 os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
 
@@ -200,14 +204,28 @@ if submit_button:
     if not parent_name or not phone_no or not baby_name or not uploaded_baby_photo or not uploaded_receipt or not agree:
         st.error(error_msg)
     else:
-        # Simpan fail gambar baby
+        # Simpan fail sementara di server Streamlit
         baby_photo_path = os.path.join("uploads/baby_photos", f"{phone_no}_{uploaded_baby_photo.name}")
         with open(baby_photo_path, "wb") as f:
             f.write(uploaded_baby_photo.getbuffer())
             
-        # Simpan fail resit
         receipt_path = os.path.join("uploads/receipts", f"{phone_no}_{uploaded_receipt.name}")
         with open(receipt_path, "wb") as f:
-            f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer())
+            f.write(uploaded_receipt.getbuffer())
             
+        # Hantar data teks ke Google Sheets melalui API
+        if GOOGLE_SCRIPT_URL != "MASUKKAN_URL_GOOGLE_APPS_SCRIPT_DI_SINI":
+            try:
+                payload = {
+                    "parent_name": parent_name,
+                    "phone_no": phone_no,
+                    "baby_name": baby_name,
+                    "baby_age": str(baby_age),
+                    "baby_photo_url": uploaded_baby_photo.name,
+                    "receipt_url": uploaded_receipt.name
+                }
+                requests.post(GOOGLE_SCRIPT_URL, json=payload)
+            except:
+                pass
+                
         st.success(success_msg)
