@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 # Konfigurasi Page
-st.set_page_config(page_title="Baby Contest Pacific KB Mall", page_icon="👶", layout="centered")
+st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
 # Pastikan folder untuk simpan gambar wujud
 os.makedirs("uploads/baby_photos", exist_ok=True)
@@ -15,7 +15,7 @@ lang = st.selectbox("🌐 Choose Language / Pilih Bahasa / 选择语言", ["Baha
 
 # Kamus Teks Mengikut Bahasa
 if lang == "English":
-    title = "Pacific KB Mall Super Star Baby Contest Registration"
+    title = "PACIFIC KB Mall Super Star Baby Contest Registration"
     period = "📅 Contest Period: 9 November - 29 November 2026"
     desc = "Please fill out the form below and upload your baby's photo along with a purchase receipt of RM100 and above."
     parent_label = "Parent's Name"
@@ -26,12 +26,12 @@ if lang == "English":
     receipt_label = "Upload Receipt (RM100 & above) (JPG/PNG/PDF)"
     submit_label = "Submit Entry"
     error_msg = "Please complete all information and upload the required files!"
-    success_msg = "Congratulations! Your entry has been successfully submitted. Thank you for joining the Pacific KB Mall Baby Contest!"
+    success_msg = "Congratulations! Your entry has been successfully submitted. Thank you for joining the PACIFIC KB Mall Baby Contest!"
     created_by = "Created by : Azmer"
 
 elif lang == "中文":
     _ = lang # placeholder
-    title = "Pacific KB Mall 超级星宝贝 婴儿比赛报名表格"
+    title = "PACIFIC KB Mall 超级星宝贝 婴儿比赛报名表格"
     period = "📅 比赛日期：2026年11月9日 - 11月29日"
     desc = "请填写以下表格，并上传宝宝照片以及RM100或以上的购物收据。"
     parent_label = "家长姓名"
@@ -42,11 +42,11 @@ elif lang == "中文":
     receipt_label = "上传购物收据 (RM100或以上) (JPG/PNG/PDF)"
     submit_label = "提交报名"
     error_msg = "请填写所有资料并上传所需文件！"
-    success_msg = "恭喜！您的报名已成功提交。感谢您参加 Pacific KB Mall 婴儿比赛！"
+    success_msg = "恭喜！您的报名已成功提交。感谢您参加 PACIFIC KB Mall 婴儿比赛！"
     created_by = "Created by : Azmer"
 
 else:  # Default Bahasa Melayu
-    title = "Pacific KB Mall Pendaftaran Si Manja SUPERSTAR"
+    title = "PACIFIC KB Mall Pendaftaran Si Manja SUPERSTAR"
     period = "📅 Tempoh Peraduan: 9 November - 29 November 2026"
     desc = "Sila isi borang di bawah dan muat naik gambar baby serta resit pembelian RM100 ke atas."
     parent_label = "Nama Ibu / Bapa"
@@ -57,10 +57,10 @@ else:  # Default Bahasa Melayu
     receipt_label = "Muat naik Resit Pembelian RM100 ke atas (JPG/PNG/PDF)"
     submit_label = "Hantar Penyertaan"
     error_msg = "Sila lengkapkan semua maklumat dan muat naik fail yang diperlukan!"
-    success_msg = "Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest Pacific KB Mall!"
+    success_msg = "Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest PACIFIC KB Mall!"
     created_by = "Created by : Azmer"
 
-# Paparan Logo (Ditingkatkan saiz kepada width=140) dan Tajuk Sebelah-Menyebelah
+# Paparan Logo dan Tajuk Sebelah-Menyebelah
 col1, col2 = st.columns([1, 4])  
 with col1:
     try:
