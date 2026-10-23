@@ -7,7 +7,7 @@ from datetime import datetime
 os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
 
-st.title("?? Pendaftaran Baby Contest")
+st.title("Pacific Kbmall Pendaftaran Baby Contest")
 st.write("Sila isi borang di bawah dan muat naik gambar baby serta resit pembelian RM100 ke atas.")
 
 # Borang Pendaftaran
@@ -40,23 +40,8 @@ if submit_button:
         with open(receipt_path, "wb") as f:
             f.write(uploaded_receipt.getbuffer())
             
-        # Simpan data teks ke dalam fail CSV
-        data = {
-            "Tarikh Masa": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
-            "Nama Ibu/Bapa": [parent_name],
-            "No Telefon": [phone_no],
-            "Nama Baby": [baby_name],
-            "Umur Baby (Bulan)": [baby_age],
-            "Fail Gambar": [baby_photo_path],
-            "Fail Resit": [receipt_path]
-        }
-        
-        df = pd.DataFrame(data)
-        csv_file = "submissions.csv"
-        
-        if not os.path.exists(csv_file):
-            df.to_csv(csv_file, index=False)
-        else:
-            df.to_csv(csv_file, mode='a', header=False, index=False)
-            
-        st.success("Tahniah! Penyertaan anda telah berjaya dihantar. Semoga berjaya! ??")
+        st.success("Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest Pacific KB Mall!")
+
+# Bahagian bawah (Created by)
+st.markdown("---")
+st.markdown("<p style='text-align: center; color: grey;'>Created by : Azmer</p>", unsafe_allow_html=True)
