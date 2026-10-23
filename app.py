@@ -8,7 +8,7 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# URL Web App Google Apps Script anda
+# URL Web App Google Apps Script anda yang sebenar
 GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7Sj7TmmyYfa5tEv1Uy6WELAbrzClGsoU9mOs__DuKB1rQ6HaHt0a4PkVAu1Jf24kV/exec"
 
 # CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, & Cerahkan Kotak Upload serta Bahasa
@@ -210,26 +210,25 @@ if submit_button:
             f.write(uploaded_receipt.getbuffer())
 
         # Hantar data dan fail ke Google Apps Script (Google Drive & Sheets)
-        if GOOGLE_SCRIPT_URL != "MASUKKAN_URL_GOOGLE_APPS_SCRIPT_DI_SINI":
-            try:
-                baby_photo_bytes = uploaded_baby_photo.getvalue()
-                baby_photo_base64 = base64.b64encode(baby_photo_bytes).decode('utf-8')
-                
-                receipt_bytes = uploaded_receipt.getvalue()
-                receipt_base64 = base64.b64encode(receipt_bytes).decode('utf-8')
-                
-                payload = {
-                    "parent_name": parent_name,
-                    "phone_no": phone_no,
-                    "baby_name": baby_name,
-                    "baby_age": str(baby_age),
-                    "baby_photo_name": uploaded_baby_photo.name,
-                    "baby_photo_base64": baby_photo_base64,
-                    "receipt_name": uploaded_receipt.name,
-                    "receipt_base64": receipt_base64
-                }
-                requests.post(GOOGLE_SCRIPT_URL, json=payload)
-            except Exception as e:
-                st.error(f"Gagal hantar ke Google Drive: {e}")
+        try:
+            baby_photo_bytes = uploaded_baby_photo.getvalue()
+            baby_photo_base64 = base64.b64encode(baby_photo_bytes).decode('utf-8')
+            
+            receipt_bytes = uploaded_receipt.getvalue()
+            receipt_base64 = base64.b64encode(receipt_bytes).decode('utf-8')
+            
+            payload = {
+                "parent_name": parent_name,
+                "phone_no": phone_no,
+                "baby_name": baby_name,
+                "baby_age": str(baby_age),
+                "baby_photo_name": uploaded_baby_photo.name,
+                "baby_photo_base64": baby_photo_base64,
+                "receipt_name": uploaded_receipt.name,
+                "receipt_base64": receipt_base64
+            }
+            requests.post(GOOGLE_SCRIPT_URL, json=payload)
+        except Exception as e:
+            st.error(f"Gagal hantar ke Google Drive: {e}")
 
         st.success(success_msg)
