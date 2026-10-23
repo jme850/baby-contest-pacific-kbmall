@@ -6,6 +6,24 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
+# CSS untuk Background Warna Pink Lembut & Elegan
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #fff0f3;
+    }
+    .stForm {
+        background-color: #ffffff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Pastikan folder untuk simpan gambar wujud
 os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
@@ -19,13 +37,7 @@ with top_col1:
 
 with top_col2:
     # Paparan "Created by : Azmer" di penjuru kanan atas
-    st.markdown("<div style='text-align: right; padding-top: 28px;'><span style='font-size: 11px; color: grey; background-color: rgba(255,255,255,0.7); padding: 2px 6px; border-radius: 4px;'>Created by : Azmer</span></div>", unsafe_allow_html=True)
-
-# Paparkan Gambar Background sebagai Banner Utama di Atas Sekali
-try:
-    st.image("background.png", use_container_width=True)
-except:
-    st.write("")
+    st.markdown("<div style='text-align: right; padding-top: 28px;'><span style='font-size: 11px; color: #7f8c8d; background-color: #ffffff; padding: 3px 8px; border-radius: 4px; border: 1px solid #f1f2f6;'>Created by : Azmer</span></div>", unsafe_allow_html=True)
 
 # Kamus Teks Mengikut Bahasa
 if lang == "English":
