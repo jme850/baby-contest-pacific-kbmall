@@ -6,7 +6,7 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, & Paksa Dropdown Bahasa Jadi Putih
+# CSS Khas: Paksa Background Pink, Kotak Borang Putih, Teks Hitam, & Cerahkan Kotak Upload serta Bahasa
 st.markdown(
     """
     <style>
@@ -33,12 +33,12 @@ st.markdown(
     div[data-baseweb="select"] span {
         color: #000000 !important;
     }
-    /* Paksa keseluruhan menu senarai bahasa (popover/dropdown) jadi latar belakang putih cerah & teks hitam */
+    /* Paksa menu dropdown pilihan bahasa jadi putih cerah dan teks hitam */
     div[data-baseweb="popover"], div[data-baseweb="menu"], ul[data-baseweb="menu"], li[data-baseweb="option"] {
         background-color: #ffffff !important;
         color: #000000 !important;
     }
-    div[data-baseweb="popover"] *, div[data-baseweb="menu"] *, ul[data-baseweb="menu"] * {
+    div[data-baseweb="popover"] *, div[data-baseweb="menu"] *, ul[data-baseweb="menu"] *, li[data-baseweb="option"] * {
         background-color: #ffffff !important;
         color: #000000 !important;
         -webkit-text-fill-color: #000000 !important;
@@ -48,18 +48,21 @@ st.markdown(
         background-color: #ffe3ed !important;
         color: #000000 !important;
     }
-    /* Paksa kawasan tempat upload fail jadi warna putih cerah */
+    /* Paksa kawasan tempat upload fail jadi warna putih cerah sepenuhnya */
     [data-testid="stFileUploader"] {
         background-color: #ffffff !important;
-        border: 1px solid #e0e0e0;
-        padding: 10px;
+        border: 1px solid #dcdde1;
+        padding: 12px;
         border-radius: 8px;
     }
     [data-testid="stFileUploader"] section {
-        background-color: #f8f9fa !important;
+        background-color: #ffffff !important;
+        border: 2px dashed #ff4b4b !important;
     }
     [data-testid="stFileUploader"] section * {
+        background-color: transparent !important;
         color: #2c3e50 !important;
+        -webkit-text-fill-color: #2c3e50 !important;
     }
     /* Cantikkan dan tukar warna butang Hantar Penyertaan jadi warna tema menarik */
     .stFormSubmitButton button {
