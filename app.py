@@ -98,10 +98,10 @@ with top_col2:
     # Paparan "Created by : Azmer" di penjuru kanan atas
     st.markdown("<div style='text-align: right; padding-top: 28px;'><span style='font-size: 11px; color: #7f8c8d; background-color: #ffffff; padding: 3px 8px; border-radius: 4px; border: 1px solid #f1f2f6;'>Created by : Azmer</span></div>", unsafe_allow_html=True)
 
-# Kamus Teks Mengikut Bahasa (Tanpa emoji kalendar yang bermasalah)
+# Kamus Teks Mengikut Bahasa (Tanpa sebarang ikon atau emoji di depan tempoh)
 if lang == "English":
     title = "PACIFIC KB Mall Super Star Baby Contest Registration"
-    period = "Tempoh Peraduan / Contest Period: 9 November - 29 November 2026"
+    period = "Contest Period: 9 November - 29 November 2026"
     desc = "Please fill out the form below and upload your baby's photo along with a purchase receipt of RM100 and above."
     parent_label = "Parent's Name"
     phone_label = "Phone Number (WhatsApp)"
@@ -122,7 +122,7 @@ if lang == "English":
 elif lang == "中文":
     _ = lang # placeholder
     title = "PACIFIC KB Mall 超级星宝贝 婴儿比赛报名表格"
-    period = "比赛日期 / Contest Period: 2026年11月9日 - 11月29日"
+    period = "比赛日期：2026年11月9日 - 11月29日"
     desc = "请填写以下表格，并上传宝宝照片以及RM100或以上的购物收据。"
     parent_label = "家长姓名"
     phone_label = "电话号码 (WhatsApp)"
@@ -170,7 +170,7 @@ with col1:
 with col2:
     st.title(title)
 
-st.markdown(f"### ⏰ {period}")
+st.markdown(f"### {period}")
 st.write(desc)
 
 # Borang Pendaftaran
@@ -201,13 +201,4 @@ if submit_button:
         st.error(error_msg)
     else:
         # Simpan fail gambar baby
-        baby_photo_path = os.path.join("uploads/baby_photos", f"{phone_no}_{uploaded_baby_photo.name}")
-        with open(baby_photo_path, "wb") as f:
-            f.write(uploaded_baby_photo.getbuffer())
-            
-        # Simpan fail resit
-        receipt_path = os.path.join("uploads/receipts", f"{phone_no}_{uploaded_receipt.name}")
-        with open(receipt_path, "wb") as f:
-            f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer())
-            
-        st.success(success_msg)
+        baby_photo_path = os.path.join("uploads/baby
