@@ -95,8 +95,8 @@ with top_col1:
     lang = st.selectbox("🌐 Choose Language / Pilih Bahasa / 选择语言", ["Bahasa Melayu", "English", "中文"])
 
 with top_col2:
-    # Paparan "Created by : Azmer" di penjuru kanan atas
-    st.markdown("<div style='text-align: right; padding-top: 28px;'><span style='font-size: 11px; color: #7f8c8d; background-color: #ffffff; padding: 3px 8px; border-radius: 4px; border: 1px solid #f1f2f6;'>Created by : Azmer</span></div>", unsafe_allow_html=True)
+    # Paparan "Created by : Azmer" diperkecilkan lagi saiznya (9px)
+    st.markdown("<div style='text-align: right; padding-top: 30px;'><span style='font-size: 9px; color: #7f8c8d; background-color: #ffffff; padding: 2px 6px; border-radius: 3px; border: 1px solid #f1f2f6;'>Created by : Azmer</span></div>", unsafe_allow_html=True)
 
 # Kamus Teks Mengikut Bahasa
 if lang == "English":
@@ -155,7 +155,7 @@ else:  # Default Bahasa Melayu
     Ibu bapa/penjaga mengesahkan bahawa maklumat yang diberikan adalah benar dan resit yang dikemukakan adalah sah serta belum digunakan untuk penyertaan lain. Saya memahami bahawa setiap resit pembelian minimum yang sah hanya melayakkan satu (1) penyertaan.
     Ibu bapa/penjaga memberi kebenaran kepada PACIFIC KBMall untuk menggunakan gambar bayi bagi tujuan pertandingan dan promosi berkaitan pertandingan ini melalui saluran rasmi penganjur.
     """
-    checkbox_label = "Saya bersetuju dengan pengesahan dan kebenaran di atas."
+    checkbox_label = "Ibu bapa/penjaga bersetuju dengan pengesahan dan kebenaran di atas."
     submit_label = "Hantar Penyertaan"
     error_msg = "Sila lengkapkan semua maklumat, muat naik fail yang diperlukan, dan tandakan kotak persetujuan!"
     success_msg = "Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest PACIFIC KB Mall!"
