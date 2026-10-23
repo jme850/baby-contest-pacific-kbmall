@@ -156,7 +156,7 @@ if submit_button:
         with open(baby_photo_path, "wb") as f:
             f.write(uploaded_baby_photo.getbuffer())
             
-        // Simpan fail resit
+        # Simpan fail resit (Betulkan guna '#' dan bukan '//')
         receipt_path = os.path.join("uploads/receipts", f"{phone_no}_{uploaded_receipt.name}")
         with open(receipt_path, "wb") as f:
             f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer())
