@@ -7,7 +7,7 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# URL Web App Google Apps Script anda (Gantikan teks dalam tanda petua ini)
+# URL Web App Google Apps Script anda (Gantikan teks dalam tanda petua ini dengan URL anda)
 GOOGLE_SCRIPT_URL = "MASUKKAN_URL_GOOGLE_APPS_SCRIPT_DI_SINI"
 
 # CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, & Cerahkan Kotak Upload serta Bahasa
