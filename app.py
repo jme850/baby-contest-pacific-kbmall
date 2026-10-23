@@ -60,12 +60,11 @@ else:  # Default Bahasa Melayu
     success_msg = "Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest Pacific KB Mall!"
     created_by = "Created by : Azmer"
 
-# Paparan Logo dan Tajuk Sebelah-Menyebelah
+# Paparan Logo (Ditingkatkan saiz kepada width=140) dan Tajuk Sebelah-Menyebelah
 col1, col2 = st.columns([1, 4])  
 with col1:
     try:
-        # Ganti 'logo.png' dengan nama sebenar fail logo yang anda upload tadi jika ia berbeza
-        st.image("logo.png", width=100) 
+        st.image("logo.png", width=140) 
     except:
         st.write("") 
 with col2:
