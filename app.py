@@ -98,7 +98,7 @@ with top_col2:
     # Paparan "Created by : Azmer" di penjuru kanan atas
     st.markdown("<div style='text-align: right; padding-top: 28px;'><span style='font-size: 11px; color: #7f8c8d; background-color: #ffffff; padding: 3px 8px; border-radius: 4px; border: 1px solid #f1f2f6;'>Created by : Azmer</span></div>", unsafe_allow_html=True)
 
-# Kamus Teks Mengikut Bahasa (Tanpa sebarang ikon atau emoji di depan tempoh)
+# Kamus Teks Mengikut Bahasa
 if lang == "English":
     title = "PACIFIC KB Mall Super Star Baby Contest Registration"
     period = "Contest Period: 9 November - 29 November 2026"
@@ -201,4 +201,13 @@ if submit_button:
         st.error(error_msg)
     else:
         # Simpan fail gambar baby
-        baby_photo_path = os.path.join("uploads/baby
+        baby_photo_path = os.path.join("uploads/baby_photos", f"{phone_no}_{uploaded_baby_photo.name}")
+        with open(baby_photo_path, "wb") as f:
+            f.write(uploaded_baby_photo.getbuffer())
+            
+        # Simpan fail resit
+        receipt_path = os.path.join("uploads/receipts", f"{phone_no}_{uploaded_receipt.name}")
+        with open(receipt_path, "wb") as f:
+            f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer())
+            
+        st.success(success_msg)
