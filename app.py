@@ -6,7 +6,7 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, Kotak Selectbox & Upload Putih
+# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, & Paksa Menu Bahasa Putih
 st.markdown(
     """
     <style>
@@ -23,16 +23,28 @@ st.markdown(
     h1, h2, h3, h4, h5, h6, label, p, span, div {
         color: #2c3e50 !important;
     }
-    /* Paksa kotak input, textarea, dan selectbox (pilihan bahasa) jadi latar belakang putih bersih & teks hitam */
-    input, textarea, [data-baseweb="select"] {
+    /* Paksa kotak input, textarea, dan kotak selectbox jadi latar belakang putih bersih & teks hitam */
+    input, textarea, div[data-baseweb="select"] > div {
         background-color: #ffffff !important;
         color: #000000 !important;
         -webkit-text-fill-color: #000000 !important;
     }
-    /* Warna teks dalam menu pilihan bahasa */
-    [data-baseweb="popover"] div, [data-baseweb="menu"] div {
-        color: #2c3e50 !important;
+    /* Paksa teks di dalam kotak pilihan bahasa utama */
+    div[data-baseweb="select"] span {
+        color: #000000 !important;
+    }
+    /* Paksa menu pilihan dropdown (Bahasa Melayu, English, 中文) jadi latar belakang putih & teks hitam */
+    div[data-baseweb="popover"], div[data-baseweb="menu"], ul[data-baseweb="menu"] {
         background-color: #ffffff !important;
+    }
+    div[data-baseweb="popover"] div, div[data-baseweb="menu"] li, span[data-baseweb="tag"] {
+        color: #000000 !important;
+        background-color: #ffffff !important;
+    }
+    /* Kesan hover apabila pilih bahasa */
+    div[data-baseweb="menu"] li:hover {
+        background-color: #ffe3ed !important;
+        color: #000000 !important;
     }
     /* Paksa kawasan tempat upload fail jadi warna putih cerah */
     [data-testid="stFileUploader"] {
@@ -135,7 +147,7 @@ else:  # Default Bahasa Melayu
     receipt_label = "Muat naik Resit Pembelian RM100 ke atas (JPG/PNG/PDF)"
     declaration_title = "C. PENGESAHAN IBU BAPA / PENJAGA"
     declaration_text = """
-    Saya mengesahkan bahawa maklumat yang diberikan adalah benar dan resit yang dikemukakan adalah sah serta belum digunakan untuk penyertaan lain. Saya memahami bahawa setiap resit pembelian minimum yang sah hanya melayakkan satu (1) penyertaan.
+    Ibu bapa/penjaga mengesahkan bahawa maklumat yang diberikan adalah benar dan resit yang dikemukakan adalah sah serta belum digunakan untuk penyertaan lain. Saya memahami bahawa setiap resit pembelian minimum yang sah hanya melayakkan satu (1) penyertaan.
     Saya memberi kebenaran kepada PACIFIC KBMall untuk menggunakan gambar bayi bagi tujuan pertandingan dan promosi berkaitan pertandingan ini melalui saluran rasmi penganjur.
     """
     checkbox_label = "Saya bersetuju dengan pengesahan dan kebenaran di atas."
