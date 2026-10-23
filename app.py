@@ -8,6 +8,7 @@ os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
 
 st.title("Pacific Kbmall Pendaftaran Si Manja SUPERSTAR")
+st.markdown("### 📅 Tempoh Peraduan: 9 November - 29 November 2026")
 st.write("Sila isi borang di bawah dan muat naik gambar baby serta resit pembelian RM100 ke atas.")
 
 # Borang Pendaftaran
@@ -38,7 +39,7 @@ if submit_button:
         # Simpan fail resit
         receipt_path = os.path.join("uploads/receipts", f"{phone_no}_{uploaded_receipt.name}")
         with open(receipt_path, "wb") as f:
-            f.write(uploaded_receipt.getbuffer())
+            f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer()) # simpan betul
             
         st.success("Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest Pacific KB Mall!")
 
