@@ -6,7 +6,7 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, & Paksa Menu Bahasa Putih
+# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, & Paksa Dropdown Bahasa Jadi Putih
 st.markdown(
     """
     <style>
@@ -33,16 +33,18 @@ st.markdown(
     div[data-baseweb="select"] span {
         color: #000000 !important;
     }
-    /* Paksa menu pilihan dropdown (Bahasa Melayu, English, 中文) jadi latar belakang putih & teks hitam */
-    div[data-baseweb="popover"], div[data-baseweb="menu"], ul[data-baseweb="menu"] {
+    /* Paksa keseluruhan menu senarai bahasa (popover/dropdown) jadi latar belakang putih cerah & teks hitam */
+    div[data-baseweb="popover"], div[data-baseweb="menu"], ul[data-baseweb="menu"], li[data-baseweb="option"] {
         background-color: #ffffff !important;
-    }
-    div[data-baseweb="popover"] div, div[data-baseweb="menu"] li, span[data-baseweb="tag"] {
         color: #000000 !important;
-        background-color: #ffffff !important;
     }
-    /* Kesan hover apabila pilih bahasa */
-    div[data-baseweb="menu"] li:hover {
+    div[data-baseweb="popover"] *, div[data-baseweb="menu"] *, ul[data-baseweb="menu"] * {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
+    }
+    /* Kesan warna apabila sentuh/hover pada pilihan bahasa */
+    li[data-baseweb="option"]:hover {
         background-color: #ffe3ed !important;
         color: #000000 !important;
     }
