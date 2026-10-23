@@ -50,8 +50,14 @@ if lang == "English":
     age_label = "Baby's Age (Months)"
     photo_label = "Upload Baby's Photo (JPG/PNG)"
     receipt_label = "Upload Receipt (RM100 & above) (JPG/PNG/PDF)"
+    declaration_title = "C. PARENT / GUARDIAN DECLARATION"
+    declaration_text = """
+    I confirm that the information provided is true and the receipt submitted is valid and has not been used for other entries. I understand that each valid minimum purchase receipt is eligible for one (1) entry only.
+    I give permission to PACIFIC KBMall to use the baby's photo for competition purposes and related promotions through the organizer's official channels.
+    """
+    checkbox_label = "I agree with the declaration and consent above."
     submit_label = "Submit Entry"
-    error_msg = "Please complete all information and upload the required files!"
+    error_msg = "Please complete all information, upload required files, and check the agreement box!"
     success_msg = "Congratulations! Your entry has been successfully submitted. Thank you for joining the PACIFIC KB Mall Baby Contest!"
 
 elif lang == "中文":
@@ -65,8 +71,14 @@ elif lang == "中文":
     age_label = "宝宝年龄 (个月)"
     photo_label = "上传宝宝照片 (JPG/PNG)"
     receipt_label = "上传购物收据 (RM100或以上) (JPG/PNG/PDF)"
+    declaration_title = "C. 家长 / 监护人声明"
+    declaration_text = """
+    我确认所提供的信息真实有效，提交的收据有效且未用于其他参赛。我明白每张符合条件的最低消费收据仅享有一次（1）参赛资格。
+    我授权 PACIFIC KBMall 通过主办方官方渠道使用宝宝照片用于比赛及相关促销活动。
+    """
+    checkbox_label = "我同意以上声明和授权。"
     submit_label = "提交报名"
-    error_msg = "请填写所有资料并上传所需文件！"
+    error_msg = "请填写所有资料、上传所需文件并勾选同意条款！"
     success_msg = "恭喜！您的报名已成功提交。感谢您参加 PACIFIC KB Mall 婴儿比赛！"
 
 else:  # Default Bahasa Melayu
@@ -79,8 +91,14 @@ else:  # Default Bahasa Melayu
     age_label = "Umur Anak (Bulan)"
     photo_label = "Muat naik Gambar Baby (JPG/PNG)"
     receipt_label = "Muat naik Resit Pembelian RM100 ke atas (JPG/PNG/PDF)"
+    declaration_title = "C. PENGESAHAN IBU BAPA / PENJAGA"
+    declaration_text = """
+    Saya mengesahkan bahawa maklumat yang diberikan adalah benar dan resit yang dikemukakan adalah sah serta belum digunakan untuk penyertaan lain. Saya memahami bahawa setiap resit pembelian minimum yang sah hanya melayakkan satu (1) penyertaan.
+    Saya memberi kebenaran kepada PACIFIC KBMall untuk menggunakan gambar bayi bagi tujuan pertandingan dan promosi berkaitan pertandingan ini melalui saluran rasmi penganjur.
+    """
+    checkbox_label = "Saya bersetuju dengan pengesahan dan kebenaran di atas."
     submit_label = "Hantar Penyertaan"
-    error_msg = "Sila lengkapkan semua maklumat dan muat naik fail yang diperlukan!"
+    error_msg = "Sila lengkapkan semua maklumat, muat naik fail yang diperlukan, dan tandakan kotak persetujuan!"
     success_msg = "Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest PACIFIC KB Mall!"
 
 # Paparan Logo dan Tajuk Sebelah-Menyebelah
@@ -109,11 +127,18 @@ with st.form("baby_form"):
     uploaded_baby_photo = st.file_uploader(photo_label, type=["jpg", "jpeg", "png"])
     uploaded_receipt = st.file_uploader(receipt_label, type=["jpg", "jpeg", "png", "pdf"])
     
+    st.markdown("---")
+    
+    # Bahagian Pengesahan (Declaration)
+    st.markdown(f"**{declaration_title}**")
+    st.markdown(declaration_text)
+    agree = st.checkbox(checkbox_label)
+    
     submit_button = st.form_submit_button(label=submit_label)
 
 # Proses bila customer tekan 'Hantar'
 if submit_button:
-    if not parent_name or not phone_no or not baby_name or not uploaded_baby_photo or not uploaded_receipt:
+    if not parent_name or not phone_no or not baby_name or not uploaded_baby_photo or not uploaded_receipt or not agree:
         st.error(error_msg)
     else:
         # Simpan fail gambar baby
