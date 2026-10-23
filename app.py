@@ -7,7 +7,7 @@ from datetime import datetime
 os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
 
-st.title("Pacific Kbmall Pendaftaran Baby Contest")
+st.title("Pacific Kbmall Pendaftaran Si Manja SUPERSTAR")
 st.write("Sila isi borang di bawah dan muat naik gambar baby serta resit pembelian RM100 ke atas.")
 
 # Borang Pendaftaran
