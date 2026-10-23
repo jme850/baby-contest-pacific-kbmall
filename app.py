@@ -6,7 +6,7 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, & Butang Hantar Cantik
+# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, Kotak Selectbox & Upload Putih
 st.markdown(
     """
     <style>
@@ -23,11 +23,16 @@ st.markdown(
     h1, h2, h3, h4, h5, h6, label, p, span, div {
         color: #2c3e50 !important;
     }
-    /* Paksa kotak input dan widget file uploader jadi latar belakang putih bersih & teks hitam */
-    input, textarea {
+    /* Paksa kotak input, textarea, dan selectbox (pilihan bahasa) jadi latar belakang putih bersih & teks hitam */
+    input, textarea, [data-baseweb="select"] {
         background-color: #ffffff !important;
         color: #000000 !important;
         -webkit-text-fill-color: #000000 !important;
+    }
+    /* Warna teks dalam menu pilihan bahasa */
+    [data-baseweb="popover"] div, [data-baseweb="menu"] div {
+        color: #2c3e50 !important;
+        background-color: #ffffff !important;
     }
     /* Paksa kawasan tempat upload fail jadi warna putih cerah */
     [data-testid="stFileUploader"] {
