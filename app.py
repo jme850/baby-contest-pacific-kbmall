@@ -42,6 +42,6 @@ if submit_button:
             
         st.success("Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest Pacific KB Mall!")
 
-# Bahagian bawah (Created by)
+# Bahagian bawah (Created by di sebelah kanan, saiz kecil)
 st.markdown("---")
-st.markdown("<p style='text-align: center; color: grey;'>Created by : Azmer</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: right; font-size: 12px; color: grey;'>Created by : Azmer</p>", unsafe_allow_html=True)
