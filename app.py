@@ -6,7 +6,7 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, dan Teks Hitam Jelas
+# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Kotak Upload Putih & Teks Hitam Jelas
 st.markdown(
     """
     <style>
@@ -23,11 +23,24 @@ st.markdown(
     h1, h2, h3, h4, h5, h6, label, p, span, div {
         color: #2c3e50 !important;
     }
-    /* Paksa kotak input (text input & number input) jadi latar belakang putih bersih & teks hitam */
+    /* Paksa kotak input dan widget file uploader jadi latar belakang putih bersih & teks hitam */
     input, textarea {
         background-color: #ffffff !important;
         color: #000000 !important;
         -webkit-text-fill-color: #000000 !important;
+    }
+    /* Paksa kawasan tempat upload fail jadi warna putih cerah */
+    [data-testid="stFileUploader"] {
+        background-color: #ffffff !important;
+        border: 1px solid #e0e0e0;
+        padding: 10px;
+        border-radius: 8px;
+    }
+    [data-testid="stFileUploader"] section {
+        background-color: #f8f9fa !important;
+    }
+    [data-testid="stFileUploader"] section * {
+        color: #2c3e50 !important;
     }
     </style>
     """,
@@ -146,19 +159,4 @@ with st.form("baby_form"):
     
     submit_button = st.form_submit_button(label=submit_label)
 
-# Proses bila customer tekan 'Hantar'
-if submit_button:
-    if not parent_name or not phone_no or not baby_name or not uploaded_baby_photo or not uploaded_receipt or not agree:
-        st.error(error_msg)
-    else:
-        # Simpan fail gambar baby
-        baby_photo_path = os.path.join("uploads/baby_photos", f"{phone_no}_{uploaded_baby_photo.name}")
-        with open(baby_photo_path, "wb") as f:
-            f.write(uploaded_baby_photo.getbuffer())
-            
-        # Simpan fail resit (Betulkan guna '#' dan bukan '//')
-        receipt_path = os.path.join("uploads/receipts", f"{phone_no}_{uploaded_receipt.name}")
-        with open(receipt_path, "wb") as f:
-            f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer())
-            
-        st.success(success_msg)
+# Proses bila customer tekan '
