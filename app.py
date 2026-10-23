@@ -6,18 +6,6 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS Background Warna Pastel Lembut & Ceria
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background: linear-gradient(135deg, #fce4ec 0%, #e0f7fa 100%);
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # Pastikan folder untuk simpan gambar wujud
 os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
@@ -76,6 +64,12 @@ else:  # Default Bahasa Melayu
     submit_label = "Hantar Penyertaan"
     error_msg = "Sila lengkapkan semua maklumat dan muat naik fail yang diperlukan!"
     success_msg = "Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest PACIFIC KB Mall!"
+
+# Paparkan Banner Gambar Background di atas Tajuk
+try:
+    st.image("background.png", use_container_width=True)
+except:
+    pass
 
 # Paparan Logo dan Tajuk Sebelah-Menyebelah
 col1, col2 = st.columns([1, 4])  
