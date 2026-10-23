@@ -92,10 +92,8 @@ os.makedirs("uploads/receipts", exist_ok=True)
 # Susun Bahasa & "Created by" di bahagian atas sekali (Sebelah-menyebelah)
 top_col1, top_col2 = st.columns([3, 1])
 with top_col1:
-    # Pilihan Bahasa (Language Selection)
     lang = st.selectbox("🌐 Choose Language / Pilih Bahasa / 选择语言", ["Bahasa Melayu", "English", "中文"])
 with top_col2:
-    # Paparan "Created by : Azmer" diperkecilkan lagi saiznya (9px)
     st.markdown("<div style='text-align: right; padding-top: 30px;'><span style='font-size: 9px; color: #7f8c8d; background-color: #ffffff; padding: 2px 6px; border-radius: 3px; border: 1px solid #f1f2f6;'>Created by : Azmer</span></div>", unsafe_allow_html=True)
 
 # Kamus Teks Mengikut Bahasa
@@ -182,13 +180,11 @@ with st.form("baby_form"):
     
     st.markdown("---")
     
-    # Bahagian Upload Fail
     uploaded_baby_photo = st.file_uploader(photo_label, type=["jpg", "jpeg", "png"])
     uploaded_receipt = st.file_uploader(receipt_label, type=["jpg", "jpeg", "png", "pdf"])
     
     st.markdown("---")
     
-    # Bahagian Pengesahan (Declaration)
     st.markdown(f"**{declaration_title}**")
     st.markdown(declaration_text)
     
@@ -200,7 +196,6 @@ if submit_button:
     if not parent_name or not phone_no or not baby_name or not uploaded_baby_photo or not uploaded_receipt or not agree:
         st.error(error_msg)
     else:
-        # Simpan fail sementara di server Streamlit
         baby_photo_path = os.path.join("uploads/baby_photos", f"{phone_no}_{uploaded_baby_photo.name}")
         with open(baby_photo_path, "wb") as f:
             f.write(uploaded_baby_photo.getbuffer())
