@@ -6,7 +6,7 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS untuk Background Warna Pink Lembut & Elegan
+# CSS Khas: Paksa Background Pink & Tetapkan Teks Borang Wajib Warna Hitam
 st.markdown(
     """
     <style>
@@ -18,6 +18,10 @@ st.markdown(
         padding: 25px;
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    /* Paksa semua teks dalam borang jadi hitam supaya nampak di telefon */
+    .stForm label, .stForm p, .stForm span, .stForm div {
+        color: #2c3e50 !important;
     }
     </style>
     """,
