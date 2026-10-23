@@ -6,15 +6,12 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS untuk Letak Gambar Background (Guna background.png)
+# CSS Background Warna Pastel Lembut & Ceria
 st.markdown(
     """
     <style>
     .stApp {
-        background-image: url("background.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+        background: linear-gradient(135deg, #fce4ec 0%, #e0f7fa 100%);
     }
     </style>
     """,
