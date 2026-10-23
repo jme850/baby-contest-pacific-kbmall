@@ -6,7 +6,7 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS Khas: Paksa Background Pink & Pastikan SEMUA Teks Wajib Warna Hitam (Termasuk Tajuk & Tempoh)
+# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, dan Teks Hitam Jelas
 st.markdown(
     """
     <style>
@@ -19,9 +19,15 @@ st.markdown(
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
-    /* Paksa semua teks, tajuk, label, dan perenggan jadi warna hitam */
+    /* Paksa semua tajuk, label, dan teks luar jadi warna hitam */
     h1, h2, h3, h4, h5, h6, label, p, span, div {
         color: #2c3e50 !important;
+    }
+    /* Paksa kotak input (text input & number input) jadi latar belakang putih bersih & teks hitam */
+    input, textarea {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
     }
     </style>
     """,
@@ -150,7 +156,7 @@ if submit_button:
         with open(baby_photo_path, "wb") as f:
             f.write(uploaded_baby_photo.getbuffer())
             
-        # Simpan fail resit
+        // Simpan fail resit
         receipt_path = os.path.join("uploads/receipts", f"{phone_no}_{uploaded_receipt.name}")
         with open(receipt_path, "wb") as f:
             f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer())
