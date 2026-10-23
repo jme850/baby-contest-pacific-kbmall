@@ -6,22 +6,6 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS untuk Letak Gambar Background Full Skrin
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-image: url("background.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # Pastikan folder untuk simpan gambar wujud
 os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
@@ -36,6 +20,12 @@ with top_col1:
 with top_col2:
     # Paparan "Created by : Azmer" di penjuru kanan atas
     st.markdown("<div style='text-align: right; padding-top: 28px;'><span style='font-size: 11px; color: grey; background-color: rgba(255,255,255,0.7); padding: 2px 6px; border-radius: 4px;'>Created by : Azmer</span></div>", unsafe_allow_html=True)
+
+# Paparkan Gambar Background sebagai Banner Utama di Atas Sekali
+try:
+    st.image("background.png", use_container_width=True)
+except:
+    st.write("")
 
 # Kamus Teks Mengikut Bahasa
 if lang == "English":
@@ -94,20 +84,7 @@ with col2:
 st.markdown(f"### {period}")
 st.write(desc)
 
-# Borang Pendaftaran (Diberi sedikit kesan latar belakang putih lutsinar supaya teks jelas dibaca atas gambar background)
-st.markdown(
-    """
-    <style>
-    .stForm {
-        background-color: rgba(255, 255, 255, 0.85);
-        padding: 20px;
-        border-radius: 10px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
+# Borang Pendaftaran
 with st.form("baby_form"):
     parent_name = st.text_input(parent_label)
     phone_no = st.text_input(phone_label)
