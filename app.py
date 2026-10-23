@@ -3,6 +3,9 @@ import pandas as pd
 import os
 from datetime import datetime
 
+# Konfigurasi Page
+st.set_page_config(page_title="Baby Contest Pacific KB Mall", page_icon="👶", layout="centered")
+
 # Pastikan folder untuk simpan gambar wujud
 os.makedirs("uploads/baby_photos", exist_ok=True)
 os.makedirs("uploads/receipts", exist_ok=True)
@@ -57,8 +60,17 @@ else:  # Default Bahasa Melayu
     success_msg = "Tahniah! Penyertaan anda telah berjaya dihantar. Terima kasih menyertai Baby Contest Pacific KB Mall!"
     created_by = "Created by : Azmer"
 
-# Paparan Antaramuka (UI)
-st.title(title)
+# Paparan Logo dan Tajuk Sebelah-Menyebelah
+col1, col2 = st.columns([1, 4])  
+with col1:
+    try:
+        # Ganti 'logo.png' dengan nama sebenar fail logo yang anda upload tadi jika ia berbeza
+        st.image("logo.png", width=100) 
+    except:
+        st.write("") 
+with col2:
+    st.title(title)
+
 st.markdown(f"### {period}")
 st.write(desc)
 
