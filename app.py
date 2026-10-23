@@ -6,7 +6,7 @@ from datetime import datetime
 # Konfigurasi Page
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
-# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Kotak Upload Putih & Teks Hitam Jelas
+# CSS Khas: Tetapkan Background Pink, Kotak Borang Putih, Teks Hitam, & Butang Hantar Cantik
 st.markdown(
     """
     <style>
@@ -41,6 +41,20 @@ st.markdown(
     }
     [data-testid="stFileUploader"] section * {
         color: #2c3e50 !important;
+    }
+    /* Cantikkan dan tukar warna butang Hantar Penyertaan jadi warna tema menarik */
+    .stFormSubmitButton button {
+        background-color: #e91e63 !important;
+        color: white !important;
+        font-weight: bold !important;
+        width: 100% !important;
+        border-radius: 8px !important;
+        border: none !important;
+        padding: 10px !important;
+    }
+    .stFormSubmitButton button:hover {
+        background-color: #d81b60 !important;
+        color: white !important;
     }
     </style>
     """,
@@ -159,4 +173,19 @@ with st.form("baby_form"):
     
     submit_button = st.form_submit_button(label=submit_label)
 
-# Proses bila customer tekan '
+# Proses bila customer tekan 'Hantar'
+if submit_button:
+    if not parent_name or not phone_no or not baby_name or not uploaded_baby_photo or not uploaded_receipt or not agree:
+        st.error(error_msg)
+    else:
+        # Simpan fail gambar baby
+        baby_photo_path = os.path.join("uploads/baby_photos", f"{phone_no}_{uploaded_baby_photo.name}")
+        with open(baby_photo_path, "wb") as f:
+            f.write(uploaded_baby_photo.getbuffer())
+            
+        # Simpan fail resit
+        receipt_path = os.path.join("uploads/receipts", f"{phone_no}_{uploaded_receipt.name}")
+        with open(receipt_path, "wb") as f:
+            f.write(receipt_path.encode() if isinstance(receipt_path, str) else uploaded_receipt.getbuffer())
+            
+        st.success(success_msg)
