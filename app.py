@@ -35,10 +35,10 @@ input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !i
     unsafe_allow_html=True,
 )
 
-# Paparkan "Created by: Azmer" di bahagian paling atas sekali (Penjuru Kanan)
+# Paparkan "Created by azmer" di bahagian paling atas (Kecil, tidak bold, warna lembut)
 st.markdown(
-    "<div style='text-align: right; font-size: 12px; font-weight: bold;"
-    " color: #e91e63; margin-bottom: -15px;'>Created by: Azmer</div>",
+    "<div style='text-align: right; font-size: 10px; color: #888888;"
+    " margin-bottom: -15px;'>Created by azmer</div>",
     unsafe_allow_html=True,
 )
 
