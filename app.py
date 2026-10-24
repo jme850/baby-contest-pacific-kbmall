@@ -1,5 +1,5 @@
 import base64
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import requests
 import streamlit as st
@@ -13,14 +13,14 @@ st.set_page_config(
 SHEETDB_URL = "https://sheetdb.io/api/v1/hl16pu8rhve9t"
 APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYyv_AELPBJz5v62dVbs-jPDXhjQNLVf2Lvg52gZdqRiZnBF-SWbddkDigCyXWni0wyQ/exec"
 
-# CSS Khas
+# CSS Khas (Tema Cerah / Terang)
 st.markdown(
     """
 <style>
-.stApp { background-color: #fff0f3; }
-.stForm { background-color: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.stApp { background-color: #fff5f7; }
+.stForm { background-color: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #ffccd5; }
 h1, h2, h3, h4, h5, h6, label, p, span, div { color: #2c3e50 !important; }
-input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !important; color: #000000 !important; -webkit-text-fill-color: #000000 !important; }
+input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !important; color: #000000 !important; -webkit-text-fill-color: #000000 !important; border: 1px solid #ccc !important; }
 .stFormSubmitButton button { background-color: #e91e63 !important; color: white !important; font-weight: bold !important; width: 100% !important; border-radius: 8px !important; border: none !important; padding: 10px !important; }
 .stFormSubmitButton button:hover { background-color: #d81b60 !important; color: white !important; }
 </style>
@@ -28,11 +28,25 @@ input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !i
     unsafe_allow_html=True,
 )
 
+# Bahagian Atas: Logo di kiri, "Created by: Azmer" di kanan atas
+col1, col2 = st.columns([3, 1])
+
+with col1:
+  if os.path.exists("logo.png"):
+    st.image("logo.png", width=160)
+
+with col2:
+  st.markdown(
+      "<div style='text-align: right; font-size: 12px; color: #666;"
+      " margin-top: 10px;'>Created by: Azmer</div>",
+      unsafe_allow_html=True,
+  )
+
 st.title("PACIFIC KB Mall Pendaftaran Si Manja SUPERSTAR")
 st.write("Sila isi borang di bawah untuk menyertai peraduan.")
 
 
-# Fungsi baru untuk simpan gambar/fail terus ke Google Drive & dapatkan URL
+# Fungsi untuk simpan gambar/fail terus ke Google Drive & dapatkan URL
 def upload_to_drive(uploaded_file, folder_name):
   if uploaded_file is None:
     return "Tiada fail"
@@ -98,10 +112,11 @@ if submit_button:
         baby_photo_url = upload_to_drive(uploaded_baby_photo, "Baby_Photos")
         receipt_url = upload_to_drive(uploaded_receipt, "Receipts")
 
-        # Format tarikh sebagai Teks Biasa supaya Google Sheets tidak tukar jadi nombor siri
-        formatted_date = datetime.now().strftime("'%Y-%m-%d %H:%M:%S")
+        # Tetapkan waktu mengikut zon masa Malaysia (UTC+8)
+        malaysia_time = datetime.utcnow() + timedelta(hours=8)
+        formatted_date = malaysia_time.strftime("'%Y-%m-%d %H:%M:%S")
 
-        # Data asal yang dihantar terus ke SheetDB anda
+        # Data yang dihantar ke SheetDB
         data_to_send = {
             "Tarikh": formatted_date,
             "Parent Name": parent_name,
