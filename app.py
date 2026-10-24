@@ -13,7 +13,7 @@ st.set_page_config(
 SHEETDB_URL = "https://sheetdb.io/api/v1/hl16pu8rhve9t"
 APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYyv_AELPBJz5v62dVbs-jPDXhjQNLVf2Lvg52gZdqRiZnBF-SWbddkDigCyXWni0wyQ/exec"
 
-# CSS Khas (Tema Cerah / Terang - Paksa kotak uploader jadi putih bersih)
+# CSS Khas (Tema Cerah / Terang)
 st.markdown(
     """
 <style>
@@ -32,6 +32,13 @@ input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !i
 .terms-box { background-color: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #e91e63; font-size: 13px; margin-bottom: 15px; line-height: 1.5; color: #333 !important; }
 </style>
 """,
+    unsafe_allow_html=True,
+)
+
+# Paparkan "Created by: Azmer" di bahagian paling atas sekali (Penjuru Kanan)
+st.markdown(
+    "<div style='text-align: right; font-size: 12px; font-weight: bold;"
+    " color: #e91e63; margin-bottom: -15px;'>Created by: Azmer</div>",
     unsafe_allow_html=True,
 )
 
@@ -118,7 +125,7 @@ translations = {
     },
 }
 
-# Pilihan Bahasa di Penjuru Kanan Atas & Logo di Kiri
+# Logo di Kiri & Pilihan Bahasa di Kanan
 col_logo, col_lang = st.columns([2, 2])
 
 with col_logo:
@@ -128,11 +135,6 @@ with col_logo:
 with col_lang:
   selected_lang = st.selectbox(
       "Language / Bahasa / 语言", ["Bahasa Melayu", "English", "中文"], index=0
-  )
-  st.markdown(
-      "<div style='text-align: right; font-size: 11px; color: #666;'>Created"
-      " by: Azmer</div>",
-      unsafe_allow_html=True,
   )
 
 t = translations[selected_lang]
