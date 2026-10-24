@@ -9,7 +9,7 @@ from datetime import datetime
 st.set_page_config(page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered")
 
 # URL Web App Google Apps Script anda
-GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7Sj7TmmyYfa5tEv1Uy6WELAbrzClGsoU9mOs__DuKB1rQ6HaHt0a4PkVAu1Jf24kV/exec"
+GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQ2yy2nbnCbm0mZM_MZFsqdGL_3XtYf4oLrBgNVx1YnR1xxx7LV-4wadCi-ojJ7hid/exec"
 
 # CSS Khas
 st.markdown("""
