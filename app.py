@@ -11,7 +11,7 @@ st.set_page_config(
 
 # URL SheetDB anda & URL Google Apps Script untuk simpan gambar ke Drive
 SHEETDB_URL = "https://sheetdb.io/api/v1/hl16pu8rhve9t"
-APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxHOtsTVHOvShwZgmkFh3I0Vtt17fPeIFGI5G28xJH0hShIQJvBbmR0nMn-jTmHrDQQ/exec"
+APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYyv_AELPBJz5v62dVbs-jPDXhjQNLVf2Lvg52gZdqRiZnBF-SWbddkDigCyXWni0wyQ/exec"
 
 # CSS Khas
 st.markdown(
