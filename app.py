@@ -122,12 +122,13 @@ with col2:
   st.write(desc)
 
 
-# Fungsi untuk hantar gambar terus ke pelayan ImgBB
-def upload_to_imgbb(file_bytes):
-  if not file_bytes:
+# Fungsi untuk hantar imej ke pelayan ImgBB dan pastikan dapat URL
+def upload_to_imgbb(uploaded_file):
+  if uploaded_file is None:
     return "Tiada fail"
   try:
     url = "https://api.imgbb.com/1/upload"
+    file_bytes = uploaded_file.getvalue()
     payload = {
         "key": "6d207e02c9842a22533b3d57d2a57173",
         "image": base64.b64encode(file_bytes).decode("utf-8"),
@@ -137,7 +138,9 @@ def upload_to_imgbb(file_bytes):
     if result.get("success"):
       return result["data"]["url"]
     else:
-      return "Gagal upload"
+      # Paparkan mesej ralat sebenar jika gagal dari ImgBB
+      error_msg = result.get("error", {}).get("message", "Gagal upload")
+      return f"Ralat: {error_msg}"
   except Exception as e:
     return f"Ralat: {str(e)}"
 
@@ -187,13 +190,13 @@ if submit_button:
     with open(receipt_path, "wb") as f:
       f.write(uploaded_receipt.getbuffer())
 
-    with st.spinner("Sedang memuat naik gambar dan hantar ke Google Sheets..."):
+    with st.spinner("Sedang memproses dan menghantar ke Google Sheets..."):
       try:
-        # Ambil bytes fail dan hantar ke ImgBB
-        baby_photo_url = upload_to_imgbb(uploaded_baby_photo.getvalue())
-        receipt_url = upload_to_imgbb(uploaded_receipt.getvalue())
+        # Dapatkan URL imej dari ImgBB
+        baby_photo_url = upload_to_imgbb(uploaded_baby_photo)
+        receipt_url = upload_to_imgbb(uploaded_receipt)
 
-        # Susun data untuk SheetDB
+        # Hantar data ke SheetDB
         data_to_send = {
             "Tarikh": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "Parent Name": parent_name,
