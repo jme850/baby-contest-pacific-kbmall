@@ -122,8 +122,10 @@ with col2:
   st.write(desc)
 
 
-# Fungsi bantu untuk upload gambar ke ImgBB
+# Fungsi untuk hantar gambar terus ke pelayan ImgBB
 def upload_to_imgbb(file_bytes):
+  if not file_bytes:
+    return "Tiada fail"
   try:
     url = "https://api.imgbb.com/1/upload"
     payload = {
@@ -134,9 +136,10 @@ def upload_to_imgbb(file_bytes):
     result = response.json()
     if result.get("success"):
       return result["data"]["url"]
+    else:
+      return "Gagal upload"
   except Exception as e:
-    return f"Gagal upload: {str(e)}"
-  return "Tiada fail"
+    return f"Ralat: {str(e)}"
 
 
 with st.form("baby_form"):
@@ -184,13 +187,13 @@ if submit_button:
     with open(receipt_path, "wb") as f:
       f.write(uploaded_receipt.getbuffer())
 
-    with st.spinner("Sedang menghantar penyertaan ke Google Sheets..."):
+    with st.spinner("Sedang memuat naik gambar dan hantar ke Google Sheets..."):
       try:
-        # Upload fail ke ImgBB untuk dapatkan URL
+        # Ambil bytes fail dan hantar ke ImgBB
         baby_photo_url = upload_to_imgbb(uploaded_baby_photo.getvalue())
         receipt_url = upload_to_imgbb(uploaded_receipt.getvalue())
 
-        # Format data yang serasi dengan SheetDB (Tanpa array [])
+        # Susun data untuk SheetDB
         data_to_send = {
             "Tarikh": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "Parent Name": parent_name,
