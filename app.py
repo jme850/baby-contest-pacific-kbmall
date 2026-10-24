@@ -35,10 +35,10 @@ input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !i
     unsafe_allow_html=True,
 )
 
-# Paparkan "Created by azmer" di bahagian paling atas (Kecil, tidak bold, warna lembut)
+# Paparkan "Created By : Azmer" di bahagian paling atas (Kecil, tidak bold, warna lembut)
 st.markdown(
     "<div style='text-align: right; font-size: 10px; color: #888888;"
-    " margin-bottom: -15px;'>Created by azmer</div>",
+    " margin-bottom: -15px;'>Created By : Azmer</div>",
     unsafe_allow_html=True,
 )
 
@@ -209,26 +209,4 @@ if submit_button:
         receipt_url = upload_to_drive(uploaded_receipt, "Receipts")
 
         # Tetapkan waktu mengikut zon masa Malaysia (UTC+8)
-        malaysia_time = datetime.utcnow() + timedelta(hours=8)
-        formatted_date = malaysia_time.strftime("'%Y-%m-%d %H:%M:%S")
-
-        # Data yang dihantar ke SheetDB
-        data_to_send = {
-            "Tarikh": formatted_date,
-            "Parent Name": parent_name,
-            "Phone No": str(phone_no),
-            "Baby Name": baby_name,
-            "Baby Age": str(baby_age),
-            "Baby Photo": baby_photo_url,
-            "Receipt": receipt_url,
-        }
-
-        response = requests.post(SHEETDB_URL, json=data_to_send)
-
-        if response.status_code in [200, 201]:
-          st.success(t["success"])
-        else:
-          st.error(t["error_db"] + response.text)
-
-      except Exception as e:
-        st.error(t["error_fail"] + str(e))
+        malaysia_
