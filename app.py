@@ -9,8 +9,9 @@ st.set_page_config(
     page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered"
 )
 
-# URL SheetDB anda
+# URL SheetDB anda & URL Google Apps Script untuk simpan gambar ke Drive
 SHEETDB_URL = "https://sheetdb.io/api/v1/66qrdlbot0eln"
+APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxHOtsTVHOvShwZgmkFh3I0Vtt17fPeIFGI5G28xJH0hShIQJvBbmR0nMn-jTmHrDQQ/exec"
 
 # CSS Khas
 st.markdown(
@@ -31,23 +32,30 @@ st.title("PACIFIC KB Mall Pendaftaran Si Manja SUPERSTAR")
 st.write("Sila isi borang di bawah untuk menyertai peraduan.")
 
 
-# Fungsi upload ke ImgBB
-def upload_to_imgbb(uploaded_file):
+# Fungsi baru untuk simpan gambar/fail terus ke Google Drive & dapatkan URL
+def upload_to_drive(uploaded_file, folder_name):
   if uploaded_file is None:
     return "Tiada fail"
   try:
-    url = "https://api.imgbb.com/1/upload"
     file_bytes = uploaded_file.getvalue()
+    file_base64 = (
+        f"data:{uploaded_file.type};base64,"
+        + base64.b64encode(file_bytes).decode("utf-8")
+    )
+
     payload = {
-        "key": "6d207e02c9842a22533b3d57d2a57173",
-        "image": base64.b64encode(file_bytes).decode("utf-8"),
+        "fileBase64": file_base64,
+        "fileName": uploaded_file.name,
+        "folderName": folder_name,
     }
-    response = requests.post(url, data=payload)
+
+    response = requests.post(APPS_SCRIPT_URL, json=payload)
     result = response.json()
-    if result.get("success"):
-      return result["data"]["url"]
+
+    if result.get("status") == "success":
+      return result.get("fileUrl")
     else:
-      return "Gagal upload ke ImgBB"
+      return "Gagal upload ke Drive"
   except Exception as e:
     return f"Ralat: {str(e)}"
 
@@ -68,9 +76,7 @@ with st.form("baby_form"):
       "Muat naik Resit Pembelian", type=["jpg", "jpeg", "png", "pdf"]
   )
 
-  agree = st.checkbox(
-      "Saya bersetuju dengan terma dan syarat peraduan."
-  )
+  agree = st.checkbox("Saya bersetuju dengan terma dan syarat peraduan.")
   submit_button = st.form_submit_button(label="Hantar Penyertaan")
 
 if submit_button:
@@ -84,16 +90,18 @@ if submit_button:
   ):
     st.error("Sila lengkapkan semua maklumat dan tandakan kotak persetujuan!")
   else:
-    with st.spinner("Sedang memproses dan menghantar data..."):
+    with st.spinner(
+        "Sedang memproses gambar ke Drive & hantar data ke SheetDB..."
+    ):
       try:
-        # Dapatkan URL imej dari ImgBB
-        baby_photo_url = upload_to_imgbb(uploaded_baby_photo)
-        receipt_url = upload_to_imgbb(uploaded_receipt)
+        # Dapatkan URL fail dari Google Drive
+        baby_photo_url = upload_to_drive(uploaded_baby_photo, "Baby_Photos")
+        receipt_url = upload_to_drive(uploaded_receipt, "Receipts")
 
-        # Format tarikh sebagai Teks Biasa supaya Google Sheets tidak tukar jadinombor siri
+        # Format tarikh sebagai Teks Biasa supaya Google Sheets tidak tukar jadi nombor siri
         formatted_date = datetime.now().strftime("'%Y-%m-%d %H:%M:%S")
 
-        # Data yang dihantar ke SheetDB
+        # Data asal yang dihantar terus ke SheetDB anda
         data_to_send = {
             "Tarikh": formatted_date,
             "Parent Name": parent_name,
@@ -109,7 +117,7 @@ if submit_button:
         if response.status_code in [200, 201]:
           st.success("Tahniah! Penyertaan anda telah berjaya dihantar.")
         else:
-          st.error(f"Ralat pelayan: {response.text}")
+          st.error(f"Ralat pelayan SheetDB: {response.text}")
 
       except Exception as e:
         st.error(f"Gagal menghantar data: {e}")
