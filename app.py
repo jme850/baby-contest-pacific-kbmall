@@ -122,7 +122,7 @@ with col2:
   st.write(desc)
 
 
-# Fungsi untuk hantar imej ke pelayan ImgBB dan pastikan dapat URL
+# Fungsi untuk hantar imej ke ImgBB
 def upload_to_imgbb(uploaded_file):
   if uploaded_file is None:
     return "Tiada fail"
@@ -138,7 +138,6 @@ def upload_to_imgbb(uploaded_file):
     if result.get("success"):
       return result["data"]["url"]
     else:
-      # Paparkan mesej ralat sebenar jika gagal dari ImgBB
       error_msg = result.get("error", {}).get("message", "Gagal upload")
       return f"Ralat: {error_msg}"
   except Exception as e:
@@ -196,9 +195,12 @@ if submit_button:
         baby_photo_url = upload_to_imgbb(uploaded_baby_photo)
         receipt_url = upload_to_imgbb(uploaded_receipt)
 
+        # Format tarikh masa semasa (YYYY-MM-DD HH:MM:SS)
+        current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
         # Hantar data ke SheetDB
         data_to_send = {
-            "Tarikh": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "Tarikh": current_datetime,
             "Parent Name": parent_name,
             "Phone No": phone_no,
             "Baby Name": baby_name,
