@@ -122,7 +122,7 @@ with col2:
   st.write(desc)
 
 
-# Fungsi bantu untuk upload gambar ke ImgBB supaya dapat pautan URL gambar
+# Fungsi bantu untuk upload gambar ke ImgBB
 def upload_to_imgbb(file_bytes):
   try:
     url = "https://api.imgbb.com/1/upload"
@@ -186,22 +186,19 @@ if submit_button:
 
     with st.spinner("Sedang menghantar penyertaan ke Google Sheets..."):
       try:
-        # Upload fail ke ImgBB untuk dapatkan URL paparan
+        # Upload fail ke ImgBB untuk dapatkan URL
         baby_photo_url = upload_to_imgbb(uploaded_baby_photo.getvalue())
         receipt_url = upload_to_imgbb(uploaded_receipt.getvalue())
 
-        # Format data yang dihantar ke Google Sheets melalui SheetDB
-        # Pastikan tajuk kolum (keys) di bawah sama sebiji dengan tajuk kolum di Google Sheets anda
+        # Format data yang serasi dengan SheetDB (Tanpa array [])
         data_to_send = {
-            "data": [{
-                "Tarikh": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "Parent Name": parent_name,
-                "Phone No": phone_no,
-                "Baby Name": baby_name,
-                "Baby Age": str(baby_age),
-                "Baby Photo": baby_photo_url,
-                "Receipt": receipt_url,
-            }]
+            "Tarikh": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "Parent Name": parent_name,
+            "Phone No": phone_no,
+            "Baby Name": baby_name,
+            "Baby Age": str(baby_age),
+            "Baby Photo": baby_photo_url,
+            "Receipt": receipt_url,
         }
 
         response = requests.post(SHEETDB_URL, json=data_to_send)
