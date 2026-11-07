@@ -31,6 +31,8 @@ input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !i
 .stFormSubmitButton button:hover { background-color: #d81b60 !important; color: white !important; }
 .terms-box { background-color: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #e91e63; font-size: 13px; margin-bottom: 15px; line-height: 1.5; color: #333 !important; }
 .period-badge { background-color: #ffe6eb; color: #e91e63 !important; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 14px; display: inline-block; margin-bottom: 15px; border: 1px solid #ffccd5; }
+.prizes-box { background-color: #fff0f3; padding: 15px; border-radius: 10px; border: 2px dashed #e91e63; margin-bottom: 20px; text-align: center; }
+.prizes-box h4 { color: #d81b60 !important; margin-bottom: 10px; }
 </style>
 """,
     unsafe_allow_html=True,
@@ -43,7 +45,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Kamus Terjemahan Bahasa (BM, English, 中文, தமிழ்) dengan syarat RM100
+# Kamus Terjemahan Bahasa (BM, English, 中文, தமிழ்) dengan Hadiah Menarik
 translations = {
     "Bahasa Melayu": {
         "title": "PACIFIC KB Mall Pendaftaran Si Manja SUPERSTAR",
@@ -51,6 +53,12 @@ translations = {
         "desc": (
             "Sila isi borang di bawah untuk menyertai peraduan. (Syarat"
             " Pembelian Minimum: RM100)"
+        ),
+        "prizes_title": "🏆 HADIAH MENARIK UNTUK DIMENANGI!",
+        "prizes_text": (
+            "🥇 <b>Johan:</b> RM300 | 🥈 <b>Naib Johan:</b> RM200 | 🥉"
+            " <b>Tempat Ketiga:</b> RM100<br>🎁 Serta Hadiah Saguhati RM50"
+            " menanti anda!"
         ),
         "parent_name": "Nama Ibu / Bapa",
         "phone_no": "Nombor Telefon (WhatsApp)",
@@ -86,6 +94,12 @@ translations = {
             "Please fill out the form below to join the contest. (Minimum"
             " Purchase: RM100)"
         ),
+        "prizes_title": "🏆 EXCITING PRIZES TO BE WON!",
+        "prizes_text": (
+            "🥇 <b>Champion:</b> RM300 | 🥈 <b>1st Runner Up:</b> RM200 | 🥉"
+            " <b>2nd Runner Up:</b> RM100<br>🎁 Consolation Prizes RM50 await"
+            " you!"
+        ),
         "parent_name": "Parent's Name",
         "phone_no": "Phone Number (WhatsApp)",
         "baby_name": "Baby's Name",
@@ -112,6 +126,11 @@ translations = {
         "title": "PACIFIC KB Mall 超级巨星宝宝大赛 报名表格",
         "period": "📅 比赛日期: 2026年11月9日 - 11月29日",
         "desc": "请填写以下表格以参加比赛。(最低消费: RM100)",
+        "prizes_title": "🏆 丰富奖品等着你！",
+        "prizes_text": (
+            "🥇 <b>冠军:</b> RM300 | 🥈 <b>亚军:</b> RM200 | 🥉 <b>季军:</b>"
+            " RM100<br>🎁 还有安慰奖 RM50 等着您！"
+        ),
         "parent_name": "父母姓名",
         "phone_no": "电话号码 (WhatsApp)",
         "baby_name": "宝宝姓名",
@@ -138,6 +157,11 @@ translations = {
             "போட்டியில் கலந்து கொள்ள கீழ, உள்ள படிவத்தை நிரப்பவும். (குறைந்தபட்ச"
             " வாங்குதல்: RM100)"
         ),
+        "prizes_title": "🏆 வெлத்தக்க அற்புதமான பரிசுகள்!",
+        "prizes_text": (
+            "🥇 <b>முதலிடம்:</b> RM300 | 🥈 <b>இரண்டாம் இடம்:</b> RM200 | 🥉"
+            " <b>மூன்றாம் இடம்:</b> RM100<br>🎁 ஆறுதல் பரிசுகள் RM50 காத்திருக்கின்றன!"
+        ),
         "parent_name": "பெற்றோர் பெயர்",
         "phone_no": "தொலைபேசி எண் (WhatsApp)",
         "baby_name": "குழந்தையின் பெயர்",
@@ -146,7 +170,7 @@ translations = {
         "receipt": "விலைப்பட்டியலைப் பதிவேற்றுக (குறைந்தபட்சம் RM100)",
         "terms": (
             "<b>C. பெற்றோர் / பாதுகாவலர் உறுதிப்படுத்தல்</b><br>வழங்கப்பட்ட"
-            " தகவல்கள் சரியானவை என்றும், குறைந்தபட்சம் RM100 மதிப்பuள்ள"
+            " தகவல்கள் சரியானவை என்றும், குறைந்தபட்சம் RM100 மதிப்புள்ள"
             " சமர்ப்பிக்கப்பட்ட ரசீது செல்லுபடியாகும் என்றும், வேறு எதற்கும்"
             " பயன்படுத்தப்படவில்லை என்றும் நான் உறுதிப்படுத்துகிறேன். ஒவ்வொரு"
             " ரசீதும் ஒருமுறை மட்டுமே பயன்படுத்தப்படும்.<br>போட்டி மற்றும் விளம்பர"
@@ -184,6 +208,18 @@ t = translations[selected_lang]
 
 st.title(t["title"])
 st.markdown(f"<div class='period-badge'>{t['period']}</div>", unsafe_allow_html=True)
+
+# Paparkan Kotak Hadiah Menarik
+st.markdown(
+    f"""
+<div class='prizes-box'>
+    <h4>{t['prizes_title']}</h4>
+    <p style='margin: 0; font-size: 15px;'>{t['prizes_text']}</p>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
 st.write(t["desc"])
 
 
