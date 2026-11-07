@@ -30,6 +30,7 @@ input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !i
 .stFormSubmitButton button { background-color: #e91e63 !important; color: white !important; font-weight: bold !important; width: 100% !important; border-radius: 8px !important; border: none !important; padding: 10px !important; }
 .stFormSubmitButton button:hover { background-color: #d81b60 !important; color: white !important; }
 .terms-box { background-color: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #e91e63; font-size: 13px; margin-bottom: 15px; line-height: 1.5; color: #333 !important; }
+.period-badge { background-color: #ffe6eb; color: #e91e63 !important; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 14px; display: inline-block; margin-bottom: 15px; border: 1px solid #ffccd5; }
 </style>
 """,
     unsafe_allow_html=True,
@@ -42,26 +43,29 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Kamus Terjemahan Bahasa (BM, English, 中文, தமிழ்)
+# Kamus Terjemahan Bahasa (BM, English, 中文, தமிழ்) dengan syarat RM100
 translations = {
     "Bahasa Melayu": {
         "title": "PACIFIC KB Mall Pendaftaran Si Manja SUPERSTAR",
-        "desc": "Sila isi borang di bawah untuk menyertai peraduan.",
+        "period": "📅 Tempoh Peraduan: 9 November - 29 November 2026",
+        "desc": (
+            "Sila isi borang di bawah untuk menyertai peraduan. (Syarat"
+            " Pembelian Minimum: RM100)"
+        ),
         "parent_name": "Nama Ibu / Bapa",
         "phone_no": "Nombor Telefon (WhatsApp)",
         "baby_name": "Nama Anak",
         "baby_age": "Umur Anak (Bulan)",
         "baby_photo": "Muat naik Gambar Baby",
-        "receipt": "Muat naik Resit Pembelian",
+        "receipt": "Muat naik Resit Pembelian (Min. RM100)",
         "terms": (
             "<b>C. PENGESAHAN IBU BAPA / PENJAGA</b><br>Saya mengesahkan bahawa"
-            " maklumat yang diberikan adalah benar dan resit yang dikemukakan"
-            " adalah sah serta belum digunakan untuk penyertaan lain. Saya"
-            " memahami bahawa setiap resit pembelian minimum RM50 yang sah"
-            " hanya melayakkan satu (1) penyertaan.<br>Saya memberi kebenaran"
+            " maklumat yang diberikan adalah benar dan resit bernilai minimum"
+            " RM100 yang dikemukakan adalah sah serta belum digunakan untuk"
+            " penyertaan lain. Setiap resit hanya boleh digunakan sekali dan"
+            " melayakkan satu (1) penyertaan sahaja.<br>Saya memberi kebenaran"
             " kepada Pacific KBMall untuk menggunakan gambar bayi bagi tujuan"
-            " pertandingan dan promosi berkaitan pertandingan ini melalui saluran"
-            " rasmi penganjur."
+            " pertandingan dan promosi melalui saluran rasmi penganjur."
         ),
         "agree": "Saya bersetuju dengan pengesahan dan kebenaran di atas.",
         "submit": "Hantar Penyertaan",
@@ -77,21 +81,24 @@ translations = {
     },
     "English": {
         "title": "PACIFIC KB Mall SUPERSTAR Baby Contest Registration",
-        "desc": "Please fill out the form below to join the contest.",
+        "period": "📅 Contest Period: November 9 - November 29, 2026",
+        "desc": (
+            "Please fill out the form below to join the contest. (Minimum"
+            " Purchase: RM100)"
+        ),
         "parent_name": "Parent's Name",
         "phone_no": "Phone Number (WhatsApp)",
         "baby_name": "Baby's Name",
         "baby_age": "Baby's Age (Months)",
         "baby_photo": "Upload Baby Photo",
-        "receipt": "Upload Purchase Receipt",
+        "receipt": "Upload Purchase Receipt (Min. RM100)",
         "terms": (
             "<b>C. PARENT / GUARDIAN CONFIRMATION</b><br>I confirm that the"
-            " information provided is true and the receipt submitted is valid"
-            " and has not been used for other entries. I understand that each"
-            " valid minimum purchase receipt of RM50 entitles one (1) entry only.<br>I"
-            " grant permission to Pacific KBMall to use the baby's photo for"
-            " contest and promotional purposes through the organizer's official"
-            " channels."
+            " information provided is true and the minimum RM100 receipt"
+            " submitted is valid and has not been used for other entries. Each"
+            " receipt can only be used once for one (1) entry.<br>I grant"
+            " permission to Pacific KBMall to use the baby's photo for contest"
+            " and promotional purposes through official channels."
         ),
         "agree": "I agree to the above confirmation and authorization.",
         "submit": "Submit Entry",
@@ -103,17 +110,18 @@ translations = {
     },
     "中文": {
         "title": "PACIFIC KB Mall 超级巨星宝宝大赛 报名表格",
-        "desc": "请填写以下表格以参加比赛。",
+        "period": "📅 比赛日期: 2026年11月9日 - 11月29日",
+        "desc": "请填写以下表格以参加比赛。(最低消费: RM100)",
         "parent_name": "父母姓名",
         "phone_no": "电话号码 (WhatsApp)",
         "baby_name": "宝宝姓名",
         "baby_age": "宝宝年龄 (个月)",
         "baby_photo": "上传宝宝照片",
-        "receipt": "上传购买收据",
+        "receipt": "上传购买收据 (最低 RM100)",
         "terms": (
-            "<b>C. 父母/监护人确认</b><br>我确认所提供的信息属实，提交的收据有效且未用于其他参赛。我理解每张满"
-            " RM50 的有效购物收据仅限获得一次 (1) 参赛资格。<br>我授权 Pacific"
-            " KBMall 通过主办方官方渠道使用宝宝照片用于比赛及相关促销活动。"
+            "<b>C. 父母/监护人确认</b><br>我确认所提供的信息属实，提交的最低 RM100"
+            " 收据有效且未用于其他参赛。每张收据仅限使用一次并获得一次 (1) 参赛资格。<br>我授权"
+            " Pacific KBMall 通过官方渠道使用宝宝照片用于比赛及促销活动。"
         ),
         "agree": "我同意以上确认与授权。",
         "submit": "提交报名",
@@ -125,22 +133,25 @@ translations = {
     },
     "தமிழ்": {
         "title": "PACIFIC KB Mall சூப்பர் ஸ்டார் குழந்தை போட்டி பதிவு",
-        "desc": "போட்டியில் கலந்து கொள்ள கீழ, உள்ள படிவத்தை நிரப்பவும்.",
+        "period": "📅 போட்டி காலம்: நவம்பர் 9 - நவம்பர் 29, 2026",
+        "desc": (
+            "போட்டியில் கலந்து கொள்ள கீழ, உள்ள படிவத்தை நிரப்பவும். (குறைந்தபட்ச"
+            " வாங்குதல்: RM100)"
+        ),
         "parent_name": "பெற்றோர் பெயர்",
         "phone_no": "தொலைபேசி எண் (WhatsApp)",
         "baby_name": "குழந்தையின் பெயர்",
         "baby_age": "குழந்தையின் வயது (மாதங்கள்)",
         "baby_photo": "குழந்தையின் புகைப்படத்தைப் பதிவேற்றுக",
-        "receipt": "விலைப்பட்டியலைப் (Receipt) பதிவேற்றுக",
+        "receipt": "விலைப்பட்டியலைப் பதிவேற்றுக (குறைந்தபட்சம் RM100)",
         "terms": (
             "<b>C. பெற்றோர் / பாதுகாவலர் உறுதிப்படுத்தல்</b><br>வழங்கப்பட்ட"
-            " தகவல்கள் சரியானவை என்றும், சமர்ப்பிக்கப்பட்ட ரசீது செல்லுபடியாகும்"
-            " என்றும், வேறு எதற்கும் பயன்படுத்தப்படவில்லை என்றும் நான்"
-            " உறுதிப்படுத்துகிறேன். குறைந்தபட்சம் RM50 வாங்கிய செல்லுபடியாகும்"
-            " ஒவ்வொரு ரசீதும் ஒரு (1) நுழைவுக்கு மட்டுமே தmகுதியளிக்கும் என்பதை நான்"
-            " அறிவேன்.<br>போட்டி மற்றும் விளம்பர நோக்கங்களுக்காக குழந்தையின்"
-            " புகைப்படத்தைப் பயன்படுத்த Pacific KBMall-க்கு நான் அனுமதி"
-            " அளிக்கிறேன்."
+            " தகவல்கள் சரியானவை என்றும், குறைந்தபட்சம் RM100 மதிப்பuள்ள"
+            " சமர்ப்பிக்கப்பட்ட ரசீது செல்லுபடியாகும் என்றும், வேறு எதற்கும்"
+            " பயன்படுத்தப்படவில்லை என்றும் நான் உறுதிப்படுத்துகிறேன். ஒவ்வொரு"
+            " ரசீதும் ஒருமுறை மட்டுமே பயன்படுத்தப்படும்.<br>போட்டி மற்றும் விளம்பர"
+            " நோக்கங்களுக்காக குழந்தையின் புகைப்படத்தைப் பயன்படுத்த Pacific"
+            " KBMall-க்கு நான் அனுமதி அளிக்கிறேன்."
         ),
         "agree": "மேற்கண்ட உறுதிப்படுத்தல் மற்றும் ஒப்புதலுக்கு நான் உடன்படுகிறேன்.",
         "submit": "பதிவை சமர்ப்பிக்கவும்",
@@ -172,6 +183,7 @@ with col_lang:
 t = translations[selected_lang]
 
 st.title(t["title"])
+st.markdown(f"<div class='period-badge'>{t['period']}</div>", unsafe_allow_html=True)
 st.write(t["desc"])
 
 
