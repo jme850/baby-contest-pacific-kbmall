@@ -42,14 +42,14 @@ input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !i
     unsafe_allow_html=True,
 )
 
-# Paparkan "Created By : Azmer" di bahagian paling atas (Kecil, tidak bold, warna lembut)
+# Paparkan "Created By : Azmer" di bahagian paling atas
 st.markdown(
     "<div style='text-align: right; font-size: 10px; color: #888888;"
     " margin-bottom: -15px;'>Created By : Azmer</div>",
     unsafe_allow_html=True,
 )
 
-# Kamus Terjemahan Bahasa (BM, English, 中文, தமிழ்) dengan Tarikh Penting
+# Kamus Terjemahan Bahasa (BM, English, 中文, தமிழ்)
 translations = {
     "Bahasa Melayu": {
         "title": "PACIFIC KB Mall Pendaftaran Si Manja SUPERSTAR",
@@ -184,3 +184,28 @@ translations = {
         "agree": "我同意以上确认与授权。",
         "submit": "提交报名",
         "error_fill": "请填写所有信息并勾选同意条款！",
+        "spinner": "正在处理照片并提交数据至服务器...",
+        "success": "恭喜！您的参赛申请已成功提交。",
+        "error_db": "服务器错误: ",
+        "error_fail": "提交数据失败: ",
+    },
+    "தமிழ்": {
+        "title": "PACIFIC KB Mall சூப்பர் ஸ்டார் குழந்தை போட்டி பதிவு",
+        "period": "📅 போட்டி காலம்: நவம்பர் 9 - நவம்பர் 29, 2026",
+        "desc": (
+            "போட்டியில் கலந்து கொள்ள கீழ, உள்ள படிவத்தை நிரப்பவும். (குறைந்தபட்ச"
+            " வாங்குதல்: RM100)"
+        ),
+        "prizes_title": "🏆 வெல்லத்தக்க அற்புதமான பரிசுகள்!",
+        "prizes_text": (
+            "🥇 <b>முதலிடம்:</b> RM300 | 🥈 <b>இரண்டாம் இடம்:</b> RM200 | 🥉"
+            " <b>மூன்றாம் இடம்:</b> RM100<br>🎁 ஆறுதல் பரிசுகள் RM50 காத்திருக்கின்றன!"
+        ),
+        "criteria_title": "📊 மதிப்பீட்டு அளவுகோல்",
+        "criteria_text": (
+            "👶 அழகு மற்றும் வெளிப்பாடு: <b>40%</b><br>📸 புகைப்பட படைப்பாற்றல்:"
+            " <b>20%</b><br>🌟 தனித்தன்மை: <b>10%</b><br>❤️ சமூக ஊடக வாக்குகள்:"
+            " <b>30%</b>"
+        ),
+        "dates_title": "📅 முக்கியமான தேதிகள்",
+        "dates_
