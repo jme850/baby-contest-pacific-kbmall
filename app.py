@@ -241,7 +241,7 @@ translations = {
     },
 }
 
-# Logo di Kiri & Pilihan Bahasa di Kanan (Logo dibesarkan width=200)
+# Logo di Kiri & Pilihan Bahasa di Kanan
 col_logo, col_lang = st.columns([2, 2])
 
 with col_logo:
@@ -256,6 +256,10 @@ with col_lang:
   )
 
 t = translations[selected_lang]
+
+# Paparkan Banner / Gambar Baby di bahagian atas (Serupa dengan Poster)
+if os.path.exists("banner_baby.png"):
+  st.image("banner_baby.png", use_container_width=True)
 
 st.title(t["title"])
 st.markdown(f"<div class='period-badge'>{t['period']}</div>", unsafe_allow_html=True)
