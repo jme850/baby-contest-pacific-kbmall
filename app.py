@@ -33,6 +33,8 @@ input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !i
 .period-badge { background-color: #ffe6eb; color: #e91e63 !important; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 14px; display: inline-block; margin-bottom: 15px; border: 1px solid #ffccd5; }
 .prizes-box { background-color: #fff0f3; padding: 15px; border-radius: 10px; border: 2px dashed #e91e63; margin-bottom: 20px; text-align: center; }
 .prizes-box h4 { color: #d81b60 !important; margin-bottom: 10px; }
+.criteria-box { background-color: #ffffff; padding: 15px; border-radius: 10px; border: 1px solid #ffccd5; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.criteria-box h4 { color: #d81b60 !important; margin-bottom: 10px; text-align: center; }
 </style>
 """,
     unsafe_allow_html=True,
@@ -45,7 +47,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Kamus Terjemahan Bahasa (BM, English, 中文, தமிழ்) dengan Hadiah Menarik
+# Kamus Terjemahan Bahasa (BM, English, 中文, தமிழ்) dengan Hadiah & Kriteria
 translations = {
     "Bahasa Melayu": {
         "title": "PACIFIC KB Mall Pendaftaran Si Manja SUPERSTAR",
@@ -59,6 +61,12 @@ translations = {
             "🥇 <b>Johan:</b> RM300 | 🥈 <b>Naib Johan:</b> RM200 | 🥉"
             " <b>Tempat Ketiga:</b> RM100<br>🎁 Serta Hadiah Saguhati RM50"
             " menanti anda!"
+        ),
+        "criteria_title": "📊 KRITERIA PENILAIAN",
+        "criteria_text": (
+            "👶 Kecomelan & ekspresi: <b>40%</b><br>📸 Kreativiti gambar:"
+            " <b>20%</b><br>🌟 Keunikan & daya tarikan: <b>10%</b><br>❤️ Undian"
+            " media sosial: <b>30%</b>"
         ),
         "parent_name": "Nama Ibu / Bapa",
         "phone_no": "Nombor Telefon (WhatsApp)",
@@ -100,6 +108,12 @@ translations = {
             " <b>2nd Runner Up:</b> RM100<br>🎁 Consolation Prizes RM50 await"
             " you!"
         ),
+        "criteria_title": "📊 EVALUATION CRITERIA",
+        "criteria_text": (
+            "👶 Cuteness & Expression: <b>40%</b><br>📸 Photo Creativity:"
+            " <b>20%</b><br>🌟 Uniqueness & Appeal: <b>10%</b><br>❤️ Social"
+            " Media Votes: <b>30%</b>"
+        ),
         "parent_name": "Parent's Name",
         "phone_no": "Phone Number (WhatsApp)",
         "baby_name": "Baby's Name",
@@ -131,6 +145,11 @@ translations = {
             "🥇 <b>冠军:</b> RM300 | 🥈 <b>亚军:</b> RM200 | 🥉 <b>季军:</b>"
             " RM100<br>🎁 还有安慰奖 RM50 等着您！"
         ),
+        "criteria_title": "📊 评选标准",
+        "criteria_text": (
+            "👶 可爱与表情: <b>40%</b><br>📸 照片创意: <b>20%</b><br>🌟 独特性与吸引力:"
+            " <b>10%</b><br>❤️ 社交媒体投票: <b>30%</b>"
+        ),
         "parent_name": "父母姓名",
         "phone_no": "电话号码 (WhatsApp)",
         "baby_name": "宝宝姓名",
@@ -157,10 +176,16 @@ translations = {
             "போட்டியில் கலந்து கொள்ள கீழ, உள்ள படிவத்தை நிரப்பவும். (குறைந்தபட்ச"
             " வாங்குதல்: RM100)"
         ),
-        "prizes_title": "🏆 வெлத்தக்க அற்புதமான பரிசுகள்!",
+        "prizes_title": "🏆 வெல்லத்தக்க அற்புதமான பரிசுகள்!",
         "prizes_text": (
             "🥇 <b>முதலிடம்:</b> RM300 | 🥈 <b>இரண்டாம் இடம்:</b> RM200 | 🥉"
             " <b>மூன்றாம் இடம்:</b> RM100<br>🎁 ஆறுதல் பரிசுகள் RM50 காத்திருக்கின்றன!"
+        ),
+        "criteria_title": "📊 மதிப்பீட்டு அளவுகோல்",
+        "criteria_text": (
+            "👶 அழகு மற்றும் வெளிப்பாடு: <b>40%</b><br>📸 புகைப்பட படைப்பாற்றல்:"
+            " <b>20%</b><br>🌟 தனித்தன்மை: <b>10%</b><br>❤️ சமூக ஊடக வாக்குகள்:"
+            " <b>30%</b>"
         ),
         "parent_name": "பெற்றோர் பெயர்",
         "phone_no": "தொலைபேசி எண் (WhatsApp)",
@@ -215,6 +240,17 @@ st.markdown(
 <div class='prizes-box'>
     <h4>{t['prizes_title']}</h4>
     <p style='margin: 0; font-size: 15px;'>{t['prizes_text']}</p>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
+# Paparkan Kotak Kriteria Penilaian
+st.markdown(
+    f"""
+<div class='criteria-box'>
+    <h4>{t['criteria_title']}</h4>
+    <p style='margin: 0; font-size: 14px; line-height: 1.6;'>{t['criteria_text']}</p>
 </div>
 """,
     unsafe_allow_html=True,
