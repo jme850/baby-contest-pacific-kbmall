@@ -208,4 +208,172 @@ translations = {
             " <b>30%</b>"
         ),
         "dates_title": "📅 முக்கியமான தேதிகள்",
-        "dates_
+        "dates_text": (
+            "📝 <b>நவம்பர் 9 - 25:</b> பதிவு & ரசீது சரிபார்ப்பு<br>📢 <b>நவம்பர்"
+            " 26 - 28:</b> பங்கேற்பாளர் விளம்பரம் & மதிப்பீடு<br>🏆 <b>நவம்பர்"
+            " 29:</b> வெற்றியாளர் அறிவிப்பு"
+        ),
+        "parent_name": "பெற்றோர் பெயர்",
+        "phone_no": "தொலைபேசி எண் (WhatsApp)",
+        "baby_name": "குழந்தையின் பெயர்",
+        "baby_age": "குழந்தையின் வயது (மாதங்கள்)",
+        "baby_photo": "குழந்தையின் புகைப்படத்தைப் பதிவேற்றுக",
+        "receipt": "விலைப்பட்டியலைப் பதிவேற்றுக (குறைந்தபட்சம் RM100)",
+        "terms": (
+            "<b>C. பெற்றோர் / பாதுகாவலர் உறுதிப்படுத்தல்</b><br>வழங்கப்பட்ட"
+            " தகவல்கள் சரியானவை என்றும், குறைந்தபட்சம் RM100 மதிப்புள்ள"
+            " சமர்ப்பிக்கப்பட்ட ரசீது செல்லுபடியாகும் என்றும், வேறு எதற்கும்"
+            " பயன்படுத்தப்படவில்லை என்றும் நான் உறுதிப்படுத்துகிறேன். ஒவ்வொரு"
+            " ரசீதும் ஒருமுறை மட்டுமே பயன்படுத்தப்படும்.<br>போட்டி மற்றும் விளம்பர"
+            " நோக்கங்களுக்காக குழந்தையின் புகைப்படத்தைப் பயன்படுத்த Pacific"
+            " KBMall-க்கு நான் அனுமதி அளிக்கிறேன்."
+        ),
+        "agree": "மேற்கண்ட உறுதிப்படுத்தல் மற்றும் ஒப்புதலுக்கு நான் உடன்படுகிறேன்.",
+        "submit": "பதிவை சமர்ப்பிக்கவும்",
+        "error_fill": (
+            "தயவுசெய்து அனைத்து விவரங்களையும் பூர்த்தி செய்து ஒப்புதல்"
+            " பெட்டியை டிக் செய்யவும்!"
+        ),
+        "spinner": "படங்களை Drive-க்கு அனுப்பி தரவுகள் செயலாக்கப்படுகின்றன...",
+        "success": "வாழ்த்துகள்! உங்கள் பதிவு வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது.",
+        "error_db": "SheetDB சேவையகப் பிழை: ",
+        "error_fail": "தரவை அனுப்புவதில் தோல்வி: ",
+    },
+}
+
+# Logo di Kiri & Pilihan Bahasa di Kanan (Logo dibesarkan width=200)
+col_logo, col_lang = st.columns([2, 2])
+
+with col_logo:
+  if os.path.exists("logo.png"):
+    st.image("logo.png", width=200)
+
+with col_lang:
+  selected_lang = st.selectbox(
+      "Language / Bahasa / 语言 / தமிழ்",
+      ["Bahasa Melayu", "English", "中文", "தமிழ்"],
+      index=0,
+  )
+
+t = translations[selected_lang]
+
+st.title(t["title"])
+st.markdown(f"<div class='period-badge'>{t['period']}</div>", unsafe_allow_html=True)
+
+# Paparkan Kotak Hadiah Menarik
+st.markdown(
+    f"""
+<div class='prizes-box'>
+    <h4>{t['prizes_title']}</h4>
+    <p style='margin: 0; font-size: 15px;'>{t['prizes_text']}</p>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
+# Paparkan Kotak Kriteria Penilaian
+st.markdown(
+    f"""
+<div class='criteria-box'>
+    <h4>{t['criteria_title']}</h4>
+    <p style='margin: 0; font-size: 14px; line-height: 1.6;'>{t['criteria_text']}</p>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
+# Paparkan Kotak Tarikh Penting
+st.markdown(
+    f"""
+<div class='dates-box'>
+    <h4>{t['dates_title']}</h4>
+    <p style='margin: 0; font-size: 14px; line-height: 1.6;'>{t['dates_text']}</p>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
+st.write(t["desc"])
+
+
+# Fungsi untuk simpan gambar/fail terus ke Google Drive & dapatkan URL
+def upload_to_drive(uploaded_file, folder_name):
+  if uploaded_file is None:
+    return "Tiada fail"
+  try:
+    file_bytes = uploaded_file.getvalue()
+    file_base64 = (
+        f"data:{uploaded_file.type};base64,"
+        + base64.b64encode(file_bytes).decode("utf-8")
+    )
+
+    payload = {
+        "fileBase64": file_base64,
+        "fileName": uploaded_file.name,
+        "folderName": folder_name,
+    }
+
+    response = requests.post(APPS_SCRIPT_URL, json=payload)
+    result = response.json()
+
+    if result.get("status") == "success":
+      return result.get("fileUrl")
+    else:
+      return "Gagal upload ke Drive"
+  except Exception as e:
+    return f"Ralat: {str(e)}"
+
+
+with st.form("baby_form"):
+  parent_name = st.text_input(t["parent_name"])
+  phone_no = st.text_input(t["phone_no"])
+  baby_name = st.text_input(t["baby_name"])
+  baby_age = st.number_input(t["baby_age"], min_value=0, max_value=36, value=12)
+
+  st.markdown("---")
+  uploaded_baby_photo = st.file_uploader(
+      t["baby_photo"], type=["jpg", "jpeg", "png"]
+  )
+  uploaded_receipt = st.file_uploader(
+      t["receipt"], type=["jpg", "jpeg", "png", "pdf"]
+  )
+
+  st.markdown("---")
+  st.markdown(f"<div class='terms-box'>{t['terms']}</div>", unsafe_allow_html=True)
+
+  agree = st.checkbox(t["agree"])
+  submit_button = st.form_submit_button(label=t["submit"])
+
+if submit_button:
+  if (
+      not parent_name
+      or not phone_no
+      or not baby_name
+      or not uploaded_baby_photo
+      or not uploaded_receipt
+      or not agree
+  ):
+    st.error(t["error_fill"])
+  else:
+    with st.spinner(t["spinner"]):
+      try:
+        # Dapatkan URL fail dari Google Drive
+        baby_photo_url = upload_to_drive(uploaded_baby_photo, "Baby_Photos")
+        receipt_url = upload_to_drive(uploaded_receipt, "Receipts")
+
+        # Tetapkan waktu mengikut zon masa Malaysia (UTC+8)
+        malaysia_time = datetime.utcnow() + timedelta(hours=8)
+        formatted_date = malaysia_time.strftime("'%Y-%m-%d %H:%M:%S")
+
+        # Data yang dihantar ke SheetDB
+        data_to_send = {
+            "Tarikh": formatted_date,
+            "Parent Name": parent_name,
+            "Phone No": str(phone_no),
+            "Baby Name": baby_name,
+            "Baby Age": str(baby_age),
+            "Baby Photo": baby_photo_url,
+            "Receipt": receipt_url,
+        }
+
+        response = requests.post(SHEETDB_URL, json
