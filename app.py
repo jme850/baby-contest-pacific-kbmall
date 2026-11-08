@@ -9,6 +9,13 @@ st.set_page_config(
     page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered"
 )
 
+# Paparkan "Created By : Azmer" betul-betul di bahagian paling atas sekali
+st.markdown(
+    "<div style='text-align: right; font-size: 11px; color: #888888;"
+    " margin-bottom: -15px; font-weight: bold;'>Created By : Azmer</div>",
+    unsafe_allow_html=True,
+)
+
 # URL SheetDB & Google Apps Script
 SHEETDB_URL = "https://sheetdb.io/api/v1/hl16pu8rhve9t"
 APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYyv_AELPBJz5v62dVbs-jPDXhjQNLVf2Lvg52gZdqRiZnBF-SWbddkDigCyXWni0wyQ/exec"
@@ -40,13 +47,6 @@ input, textarea, div[data-baseweb="select"] > div { background-color: #ffffff !i
 .dates-box h4 { color: #d81b60 !important; margin-bottom: 10px; text-align: center; }
 </style>
 """,
-    unsafe_allow_html=True,
-)
-
-# Paparkan "Created By : Azmer" di bahagian paling atas kanan
-st.markdown(
-    "<div style='text-align: right; font-size: 11px; color: #888888;"
-    " margin-bottom: -10px; font-weight: bold;'>Created By : Azmer</div>",
     unsafe_allow_html=True,
 )
 
@@ -209,7 +209,7 @@ translations = {
     },
 }
 
-# Logo di Kiri & Pilihan Bahasa di Kanan (3 bahasa sahaja)
+# Logo di Kiri & Pilihan Bahasa di Kanan
 col_logo, col_lang = st.columns([2, 2])
 
 with col_logo:
@@ -223,7 +223,7 @@ with col_lang:
 
 t = translations[selected_lang]
 
-# Paparkan Banner Gambar Bayi di atas (Jika fail banner_baby.png diletakkan dalam folder)
+# Paparkan Banner Gambar Bayi di atas
 if os.path.exists("banner_baby.png"):
   st.image("banner_baby.png", use_container_width=True)
 
