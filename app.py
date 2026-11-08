@@ -9,9 +9,9 @@ st.set_page_config(
     page_title="Baby Contest PACIFIC KB Mall", page_icon="👶", layout="centered"
 )
 
-# Paparkan "Created By : Azmer" betul-betul di bahagian paling atas sekali
+# Paparkan "Created By : Azmer" di bahagian paling atas dengan saiz yang lebih kecil (9px)
 st.markdown(
-    "<div style='text-align: right; font-size: 11px; color: #888888;"
+    "<div style='text-align: right; font-size: 9px; color: #888888;"
     " margin-bottom: -15px; font-weight: bold;'>Created By : Azmer</div>",
     unsafe_allow_html=True,
 )
