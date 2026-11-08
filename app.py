@@ -292,4 +292,68 @@ def upload_to_drive(uploaded_file, folder_name):
     result = response.json()
 
     if result.get("status") == "success":
-      return
+      return result.get("fileUrl")
+    else:
+      return "Gagal upload ke Drive"
+  except Exception as e:
+    return f"Ralat: {str(e)}"
+
+
+with st.form("baby_form"):
+  parent_name = st.text_input(t["parent_name"])
+  phone_no = st.text_input(t["phone_no"])
+  baby_name = st.text_input(t["baby_name"])
+  baby_age = st.number_input(t["baby_age"], min_value=0, max_value=36, value=12)
+
+  st.markdown("---")
+  uploaded_baby_photo = st.file_uploader(
+      t["baby_photo"], type=["jpg", "jpeg", "png"]
+  )
+  uploaded_receipt = st.file_uploader(
+      t["receipt"], type=["jpg", "jpeg", "png", "pdf"]
+  )
+
+  st.markdown("---")
+  st.markdown(f"<div class='terms-box'>{t['terms']}</div>", unsafe_allow_html=True)
+
+  agree = st.checkbox(t["agree"])
+  submit_button = st.form_submit_button(label=t["submit"])
+
+if submit_button:
+  if (
+      not parent_name
+      or not phone_no
+      or not baby_name
+      or not uploaded_baby_photo
+      or not uploaded_receipt
+      or not agree
+  ):
+    st.error(t["error_fill"])
+  else:
+    with st.spinner(t["spinner"]):
+      try:
+        baby_photo_url = upload_to_drive(uploaded_baby_photo, "Baby_Photos")
+        receipt_url = upload_to_drive(uploaded_receipt, "Receipts")
+
+        malaysia_time = datetime.utcnow() + timedelta(hours=8)
+        formatted_date = malaysia_time.strftime("'%Y-%m-%d %H:%M:%S")
+
+        data_to_send = {
+            "Tarikh": formatted_date,
+            "Parent Name": parent_name,
+            "Phone No": str(phone_no),
+            "Baby Name": baby_name,
+            "Baby Age": str(baby_age),
+            "Baby Photo": baby_photo_url,
+            "Receipt": receipt_url,
+        }
+
+        response = requests.post(SHEETDB_URL, json=data_to_send)
+
+        if response.status_code in [200, 201]:
+          st.success(t["success"])
+        else:
+          st.error(t["error_db"] + response.text)
+
+      except Exception as e:
+        st.error(t["error_fail"] + str(e))
