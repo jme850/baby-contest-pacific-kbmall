@@ -50,7 +50,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Kamus Terjemahan Bahasa (BM, English, 中文, தமிழ்)
+# Kamus Terjemahan Bahasa (BM, English, 中文)
 translations = {
     "Bahasa Melayu": {
         "title": "PACIFIC KB Mall - Si Manja SUPERSTAR!",
@@ -207,63 +207,9 @@ translations = {
         "error_db": "服务器错误: ",
         "error_fail": "提交数据失败: ",
     },
-    "தமிழ்": {
-        "title": "PACIFIC KB Mall - சூப்பர் ஸ்டார் குழந்தை",
-        "subtitle": (
-            "உங்கள் குழந்தையைக் காட்டுங்கள், பிரகாசிக்கட்டும்! (குழந்தை"
-            " புகைப்பட போட்டி 2026)"
-        ),
-        "period": (
-            "📅 போட்டி காலம்: நவம்பர் 9 - நவம்பர் 29, 2026 (PACIFIC KB MALL கோத்தா"
-            " பாரு)"
-        ),
-        "desc": (
-            "பதிவு செய்ய கீழே உள்ள படிவத்தை நிரப்பவும். (குறைந்தபட்ச வாங்குதல்:"
-            " RM100)"
-        ),
-        "prizes_title": "🏆 பரிசுகள்",
-        "prizes_text": (
-            "🥇 <b>முதலிடம்:</b> RM300 | 🥈 <b>இரண்டாம் இடம்:</b> RM200 | 🥉"
-            " <b>மூன்றாம் இடம்:</b> RM100<br>🎁 ஆறுதல் பரிசுகள் x1 RM50"
-        ),
-        "criteria_title": "📊 மதிப்பீட்டு அளவுகோல்",
-        "criteria_text": (
-            "👶 அழகு மற்றும் வெளிப்பாடு: <b>40%</b><br>📸 புகைப்பட படைப்பாற்றல்:"
-            " <b>20%</b><br>🌟 தனித்தன்மை: <b>10%</b><br>❤️ சமூக ஊடக வாக்குகள்:"
-            " <b>30%</b>"
-        ),
-        "dates_title": "📅 முக்கியமான தேதிகள்",
-        "dates_text": (
-            "📝 <b>நவம்பர் 9 - 25:</b> பதிவு & ரசீது சரிபார்ப்பு<br>📢 <b>நவம்பர்"
-            " 26 - 28:</b> பங்கேற்பாளர் விளம்பரம் & மதிப்பீடு<br>🏆 <b>நவம்பர்"
-            " 29:</b> வெற்றியாளர் அறிவிப்பு"
-        ),
-        "parent_name": "பெற்றோர் பெயர்",
-        "phone_no": "தொலைபேசி எண் (WhatsApp)",
-        "baby_name": "குழந்தையின் பெயர்",
-        "baby_age": "குழந்தையின் வயது (மாதங்கள் - 0 முதல் 36 மாதங்கள் வரை)",
-        "baby_photo": "குழந்தையின் புகைப்படத்தைப் பதிவேற்றுக",
-        "receipt": "விலைப்பட்டியலைப் பதிவேற்றுக (குறைந்தபட்சம் RM100)",
-        "terms": (
-            "<b>விதிமுறைகள் & நிபந்தனைகள்:</b><br>• 0 முதல் 36 மாதங்களுக்கு"
-            " உட்பட்ட குழந்தைகளுக்கு மட்டுமே.<br>• குறைந்தபட்சம் RM100 வாங்குவது"
-            " ஒரு பதிவுக்கு அனுமதிக்கப்படும்.<br>• ஒவ்வொரு ரசீதும் ஒருமுறை மட்டுமே"
-            " பயன்படுத்தப்படும்.<br>• நடுவர்களின் முடிவு இறுதியானது."
-        ),
-        "agree": "மேற்கண்ட நிபந்தனைகளை நான் ஏற்றுக்கொள்கிறேன்.",
-        "submit": "பதிவை சமர்ப்பிக்கவும்",
-        "error_fill": (
-            "தயவுசெய்து அனைத்து விவரங்களையும் பூர்த்தி செய்து ஒப்புதல்"
-            " பெட்டியை டிக் செய்யவும்!"
-        ),
-        "spinner": "படங்களை Drive-க்கு அனுப்பி தரவுகள் செயலாக்கப்படுகின்றன...",
-        "success": "வாழ்த்துகள்! உங்கள் குழந்தையின் பதிவு வெற்றிகரமாக அனுப்பப்பட்டது.",
-        "error_db": "SheetDB சேவையகப் பிழை: ",
-        "error_fail": "தரவை அனுப்புவதில் தோல்வி: ",
-    },
 }
 
-# Logo di Kiri & Pilihan Bahasa di Kanan
+# Logo di Kiri & Pilihan Bahasa di Kanan (3 bahasa sahaja)
 col_logo, col_lang = st.columns([2, 2])
 
 with col_logo:
@@ -272,9 +218,7 @@ with col_logo:
 
 with col_lang:
   selected_lang = st.selectbox(
-      "Language / Bahasa / 语言 / தமிழ்",
-      ["Bahasa Melayu", "English", "中文", "தமிழ்"],
-      index=0,
+      "Language / Bahasa / 语言", ["Bahasa Melayu", "English", "中文"], index=0
   )
 
 t = translations[selected_lang]
@@ -348,68 +292,4 @@ def upload_to_drive(uploaded_file, folder_name):
     result = response.json()
 
     if result.get("status") == "success":
-      return result.get("fileUrl")
-    else:
-      return "Gagal upload ke Drive"
-  except Exception as e:
-    return f"Ralat: {str(e)}"
-
-
-with st.form("baby_form"):
-  parent_name = st.text_input(t["parent_name"])
-  phone_no = st.text_input(t["phone_no"])
-  baby_name = st.text_input(t["baby_name"])
-  baby_age = st.number_input(t["baby_age"], min_value=0, max_value=36, value=12)
-
-  st.markdown("---")
-  uploaded_baby_photo = st.file_uploader(
-      t["baby_photo"], type=["jpg", "jpeg", "png"]
-  )
-  uploaded_receipt = st.file_uploader(
-      t["receipt"], type=["jpg", "jpeg", "png", "pdf"]
-  )
-
-  st.markdown("---")
-  st.markdown(f"<div class='terms-box'>{t['terms']}</div>", unsafe_allow_html=True)
-
-  agree = st.checkbox(t["agree"])
-  submit_button = st.form_submit_button(label=t["submit"])
-
-if submit_button:
-  if (
-      not parent_name
-      or not phone_no
-      or not baby_name
-      or not uploaded_baby_photo
-      or not uploaded_receipt
-      or not agree
-  ):
-    st.error(t["error_fill"])
-  else:
-    with st.spinner(t["spinner"]):
-      try:
-        baby_photo_url = upload_to_drive(uploaded_baby_photo, "Baby_Photos")
-        receipt_url = upload_to_drive(uploaded_receipt, "Receipts")
-
-        malaysia_time = datetime.utcnow() + timedelta(hours=8)
-        formatted_date = malaysia_time.strftime("'%Y-%m-%d %H:%M:%S")
-
-        data_to_send = {
-            "Tarikh": formatted_date,
-            "Parent Name": parent_name,
-            "Phone No": str(phone_no),
-            "Baby Name": baby_name,
-            "Baby Age": str(baby_age),
-            "Baby Photo": baby_photo_url,
-            "Receipt": receipt_url,
-        }
-
-        response = requests.post(SHEETDB_URL, json=data_to_send)
-
-        if response.status_code in [200, 201]:
-          st.success(t["success"])
-        else:
-          st.error(t["error_db"] + response.text)
-
-      except Exception as e:
-        st.error(t["error_fail"] + str(e))
+      return
